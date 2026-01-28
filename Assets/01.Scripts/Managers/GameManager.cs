@@ -10,10 +10,10 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        if (smithingPanel != null)
-        {
-            smithingPanel.gameObject.SetActive(false);
-        }
+        //if (smithingPanel != null)
+        //{
+        //    smithingPanel.gameObject.SetActive(false);
+        //}
     }
 
     public void ShowSmithingPanel()
@@ -27,6 +27,6 @@ public class GameManager : MonoBehaviour
 
     public void StartSmithing()
     {
-
+        // 원하는 무기 선택 후 버튼 클릭 가능
     }
 }
