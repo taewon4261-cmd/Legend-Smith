@@ -2,49 +2,91 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Cysharp.Threading.Tasks;
 
 public class SmithingUI : MonoBehaviour
 {
-    //public Image slideImage;
+    public Image targetZoneImage;
     public Slider timingSlider;
 
-    private float targetPositio = 0.5f; // 중심 위치
+    private float targetPosition = 0.5f; // 중심 위치
     private float tolerance = 0.2f; // 난이도 조절
 
-    private bool isSuccess;
+    public GameObject[] comboStars;
+    private int currentCombo = 0;
+    private int maxCombo = 5;
+
+    void UpdateComboUI()
+    {
+        for (int i = 0; i < comboStars.Length; i++)
+        {
+            if (i < currentCombo)
+            {
+                comboStars[i].SetActive(true);
+            }
+            else
+            {
+                comboStars[i].SetActive(false);
+            }
+
+        }
+    }
 
     public void CheckHit()
     {
-        Time.timeScale = 0f;
-
         float currentVal = timingSlider.value; ;
 
-        float diff = currentVal - targetPositio;
+        float diff = currentVal - targetPosition;
         float distance =  Mathf.Abs(diff);
 
+        if (distance <= tolerance) // 성공
+        {           
+            currentCombo++;
 
-        if (distance <= tolerance)
-        {
-            isSuccess = true;
-            Debug.Log($"성공! 거리 : {distance}");
+            UpdateComboUI(); // 성공시 별 이미지 출력
+
+            SmithingEffect(true).Forget(); // 이미지 바 색 변경으로 직관적 이미지 표현
+
+            if (currentCombo >= maxCombo)
+            {
+                Debug.Log($"성공!");
+
+                currentCombo = 0;
+
+                UpdateComboUI();
+            }
         }
-        else
+        else // 실패
         {
-            isSuccess = false;
-            Debug.Log($"실패... 거리 : {distance}");
+            currentCombo = 0;
+            UpdateComboUI(); // 실패 시 이미지 다 꺼짐
+            SmithingEffect(false).Forget();
+            Debug.Log($"실패...");
         }
-
-        Time.timeScale = 1f;
-
     }
 
+    async UniTaskVoid SmithingEffect(bool isSuccess)
+    {
+        if (isSuccess == true)
+        {
+            targetZoneImage.color = Color.green;
 
+        }
+        else targetZoneImage.color = Color.gray;
+
+        await UniTask.Delay(300, cancellationToken: this.GetCancellationTokenOnDestroy());
+
+        targetZoneImage.color = Color.red;
+
+    }
     void Start()
     {
        if (timingSlider != null)
         {
             timingSlider.value = 0;
         }
+
+        UpdateComboUI(); // 별 갯수 0개로 초기화
     }
 
     void Update()
@@ -52,6 +94,7 @@ public class SmithingUI : MonoBehaviour
         if (timingSlider != null)
         {
             timingSlider.value = Mathf.PingPong(Time.time * 1f,1f);
+            
         }
     }
 }
