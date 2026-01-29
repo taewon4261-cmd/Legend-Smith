@@ -10,11 +10,14 @@ public class SmithingUI : MonoBehaviour
     public Slider timingSlider;
 
     private float targetPosition = 0.5f; // 중심 위치
-    private float tolerance = 0.2f; // 난이도 조절
+    private float tolerance = 0.1f; // 난이도 조절
 
     public GameObject[] comboStars;
     private int currentCombo = 0;
     private int maxCombo = 5;
+
+    public GameObject choicePopup;
+    private bool isPuased;
 
     void UpdateComboUI()
     {
@@ -41,19 +44,20 @@ public class SmithingUI : MonoBehaviour
 
         if (distance <= tolerance) // 성공
         {           
-            currentCombo++;
-
-            UpdateComboUI(); // 성공시 별 이미지 출력
+            isPuased = true;
 
             SmithingEffect(true).Forget(); // 이미지 바 색 변경으로 직관적 이미지 표현
 
+
             if (currentCombo >= maxCombo)
             {
-                Debug.Log($"성공!");
 
-                currentCombo = 0;
+                AddToInventory();
 
-                UpdateComboUI();
+            }
+            else
+            {
+                choicePopup.SetActive(true);
             }
         }
         else // 실패
@@ -61,8 +65,36 @@ public class SmithingUI : MonoBehaviour
             currentCombo = 0;
             UpdateComboUI(); // 실패 시 이미지 다 꺼짐
             SmithingEffect(false).Forget();
+            AddToInventory();
             Debug.Log($"실패...");
         }
+    }
+    public void OnButtonChallenge() // 추가 도전버튼
+    {
+        choicePopup.SetActive(false);
+
+        currentCombo++;
+        UpdateComboUI() ;
+
+        timingSlider.value = 0;
+
+        isPuased = false;
+    }
+
+    public void OnButtonKeep() // 그만하기 버튼
+    {
+        choicePopup.SetActive(false);
+        AddToInventory();
+    }
+
+    void AddToInventory()
+    {
+        // TODO : 인벤토리 넣기
+
+        currentCombo = 0;
+        UpdateComboUI();
+        timingSlider.value = 0;
+        isPuased = false;
     }
 
     async UniTaskVoid SmithingEffect(bool isSuccess)
@@ -91,6 +123,7 @@ public class SmithingUI : MonoBehaviour
 
     void Update()
     {
+        if (timingSlider == null || isPuased) return;
         if (timingSlider != null)
         {
             timingSlider.value = Mathf.PingPong(Time.time * 1f,1f);
