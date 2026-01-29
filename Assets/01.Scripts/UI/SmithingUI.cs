@@ -6,24 +6,29 @@ using Cysharp.Threading.Tasks;
 
 public class SmithingUI : MonoBehaviour
 {
+    [Header("SO")]
     public SmithingDifficultySO difficultyData;
 
     private float currentSpeed;
     private float currentTolerance;
 
+    [Header("UI")]
     public Image targetZoneImage;
     public Slider timingSlider;
 
     private float targetPosition = 0.5f; // 중심 위치
     private float tolerance = 0.1f; // 난이도 조절
 
+    [Header("성급 표시")]
     public GameObject[] comboStars;
     private int currentCombo = 0;
     private int maxCombo = 5;
 
+    [Header("성공 후 팝업창")]
     public GameObject choicePopup;
     private bool isPuased;
 
+    [Header("이펙트")]
     public ParticleSystem hitEffect;
 
     void Start()
@@ -34,7 +39,7 @@ public class SmithingUI : MonoBehaviour
         }
 
         UpdateComboUI(); // 별 갯수 0개로 초기화
-        SetDifficulty();
+        SetDifficulty(); // 난이도 초기화
     }
 
     void Update()
@@ -42,11 +47,12 @@ public class SmithingUI : MonoBehaviour
         if (timingSlider == null || isPuased) return;
         if (timingSlider != null)
         {
+            // 데이터에서 가져온 속도를 붙여줌
             timingSlider.value = Mathf.PingPong(Time.time * currentSpeed, 1f);
-
         }
     }
 
+    // 핵심 코드
     public void CheckHit()
     {
         float currentVal = timingSlider.value; ;
@@ -61,13 +67,11 @@ public class SmithingUI : MonoBehaviour
             SmithingEffect(true).Forget(); // 이미지 바 색 변경으로 직관적 이미지 표현
             if (hitEffect != null)
             {
-                Debug.Log("스파크 튀냐?");
                 hitEffect.Play();
             }
-
             if (currentCombo >= maxCombo)
             {
-                AddToInventory();
+                AddToInventory(); 
             }
             else
             {
@@ -77,7 +81,7 @@ public class SmithingUI : MonoBehaviour
         else // 실패
         {
             currentCombo = 0;
-            UpdateComboUI(); // 실패 시 이미지 다 꺼짐
+            UpdateComboUI(); // 실패 시 성급 이미지 다 꺼짐
             SmithingEffect(false).Forget();
 
             AddToInventory();
