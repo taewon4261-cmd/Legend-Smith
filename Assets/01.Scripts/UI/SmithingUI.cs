@@ -65,12 +65,9 @@ public class SmithingUI : MonoBehaviour
                 hitEffect.Play();
             }
 
-
             if (currentCombo >= maxCombo)
             {
-
                 AddToInventory();
-
             }
             else
             {
