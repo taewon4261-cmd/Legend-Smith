@@ -132,7 +132,7 @@ public class SmithingUI : MonoBehaviour
 
     }
 
-    void UpdateTargetZoneUI(float currentTol)
+    void UpdateTargetZoneUI(float currentTol) // 난이도 상승 시 타겟범위 변경 함수
     {
         RectTransform rect = targetZoneImage.rectTransform;
 
@@ -146,7 +146,7 @@ public class SmithingUI : MonoBehaviour
         rect.offsetMax = Vector2.zero;
     }
 
-    void UpdateComboUI()
+    void UpdateComboUI() // 성급 출력
     {
         for (int i = 0; i < comboStars.Length; i++)
         {
