@@ -21,7 +21,6 @@ public class GameManager : MonoBehaviour
     {
         if (smithingPanel != null)
         {
-            Debug.Log("Å¬¸¯ µÊ");
             smithingPanel.gameObject.SetActive(true);
         }
         smithingPanelOnBtn.SetActive(false);
