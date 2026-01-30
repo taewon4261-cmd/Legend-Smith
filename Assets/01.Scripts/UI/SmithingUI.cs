@@ -8,13 +8,12 @@ public class SmithingUI : MonoBehaviour
 {
     [Header("SO")]
     public SmithingDifficultySO difficultyData;
-
-    private float currentSpeed;
-    private float currentTolerance;
+    public SmithingRateSO rateData;
 
     [Header("UI")]
     public Image targetZoneImage;
     public Slider timingSlider;
+    public GameObject smithingPanelOnBtn; // 스미싱패널버튼인데 패배나 성공후에 인벤에 들어간거 확인하고 x표시나 뒤로가기에서 넣으면 될듯
 
     private float targetPosition = 0.5f; // 중심 위치
     private float tolerance = 0.1f; // 난이도 조절
@@ -31,6 +30,11 @@ public class SmithingUI : MonoBehaviour
     [Header("이펙트")]
     public ParticleSystem hitEffect;
 
+    private float currentSpeed;
+    private float currentTolerance;
+
+    private bool isPlaying;
+
     void Start()
     {
         if (timingSlider != null)
@@ -44,7 +48,7 @@ public class SmithingUI : MonoBehaviour
 
     void Update()
     {
-        if (timingSlider == null || isPuased) return;
+        if (timingSlider == null || isPuased || !isPlaying) return;
         if (timingSlider != null)
         {
             // 데이터에서 가져온 속도를 붙여줌
@@ -55,13 +59,15 @@ public class SmithingUI : MonoBehaviour
     // 핵심 코드
     public void CheckHit()
     {
+        if (!isPlaying) return;
+       
         float currentVal = timingSlider.value; ;
 
         float diff = currentVal - targetPosition;
-        float distance =  Mathf.Abs(diff);
+        float distance = Mathf.Abs(diff);
 
         if (distance <= tolerance) // 성공
-        {           
+        {
             isPuased = true;
 
             SmithingEffect(true).Forget(); // 이미지 바 색 변경으로 직관적 이미지 표현
@@ -71,7 +77,7 @@ public class SmithingUI : MonoBehaviour
             }
             if (currentCombo >= maxCombo)
             {
-                AddToInventory(); 
+                AddToInventory();
             }
             else
             {
@@ -87,6 +93,8 @@ public class SmithingUI : MonoBehaviour
             AddToInventory();
             SetDifficulty();
 
+            //gameObject.SetActive(false);
+
             Debug.Log($"실패...");
         }
     }
@@ -96,7 +104,7 @@ public class SmithingUI : MonoBehaviour
 
         currentCombo++;
         SetDifficulty();
-        UpdateComboUI() ;
+        UpdateComboUI();
 
         timingSlider.value = 0;
 
@@ -108,10 +116,29 @@ public class SmithingUI : MonoBehaviour
         choicePopup.SetActive(false);
         AddToInventory();
     }
+    public void OnClickGameStart()
+    {
+        if (isPlaying) return;
+
+        isPlaying = true;
+        timingSlider.value = 0;
+        currentCombo = 0;
+        SetDifficulty();
+        UpdateComboUI();
+    }
 
     void AddToInventory()
     {
-        // TODO : 인벤토리 넣기
+        ItemRarity finalRarity = ItemRarity.Normal; // 실패 시 노말
+
+        if (currentCombo >= maxCombo)
+        {
+            finalRarity = rateData.GetRandomRarity(); // 콤보 수에 따른 확률 상승
+        }
+
+        Debug.Log($"제작 완료. 등급 {finalRarity} / 콤보 : {currentCombo}");
+
+        isPlaying = false;
 
         currentCombo = 0;
         SetDifficulty();
@@ -176,5 +203,5 @@ public class SmithingUI : MonoBehaviour
         targetZoneImage.color = Color.red;
 
     }
-   
+
 }
