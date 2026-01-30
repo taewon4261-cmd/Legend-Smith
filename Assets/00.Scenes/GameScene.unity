@@ -949,6 +949,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemData: {fileID: 0}
   smithingUI: {fileID: 0}
+  Icon: {fileID: 0}
+  button: {fileID: 0}
+  isUnlocked: 0
 --- !u!1 &353445270
 GameObject:
   m_ObjectHideFlags: 0
@@ -1084,6 +1087,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemData: {fileID: 0}
   smithingUI: {fileID: 0}
+  Icon: {fileID: 0}
+  button: {fileID: 0}
+  isUnlocked: 0
 --- !u!1 &358501998
 GameObject:
   m_ObjectHideFlags: 0
@@ -6104,7 +6110,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 0ca785f1956f2fa4baddbc0bffadc39a, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -6323,7 +6329,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1040586841}
         m_TargetAssemblyTypeName: SmithingUI, Assembly-CSharp
         m_MethodName: OnButtonKeep
         m_Mode: 1
@@ -6721,6 +6727,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemData: {fileID: 0}
   smithingUI: {fileID: 0}
+  Icon: {fileID: 0}
+  button: {fileID: 0}
+  isUnlocked: 0
 --- !u!1 &632442823
 GameObject:
   m_ObjectHideFlags: 0
@@ -6856,6 +6865,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemData: {fileID: 0}
   smithingUI: {fileID: 0}
+  Icon: {fileID: 0}
+  button: {fileID: 0}
+  isUnlocked: 0
 --- !u!1 &637488639
 GameObject:
   m_ObjectHideFlags: 0
@@ -7027,6 +7039,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemData: {fileID: 0}
   smithingUI: {fileID: 0}
+  Icon: {fileID: 0}
+  button: {fileID: 0}
+  isUnlocked: 0
 --- !u!1 &740101440
 GameObject:
   m_ObjectHideFlags: 0
@@ -7246,7 +7261,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1040586841}
         m_TargetAssemblyTypeName: SmithingUI, Assembly-CSharp
         m_MethodName: OnButtonChallenge
         m_Mode: 1
@@ -7493,7 +7508,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1040586841}
         m_TargetAssemblyTypeName: SmithingUI, Assembly-CSharp
         m_MethodName: CheckHit
         m_Mode: 1
@@ -7754,6 +7769,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemData: {fileID: 0}
   smithingUI: {fileID: 0}
+  Icon: {fileID: 0}
+  button: {fileID: 0}
+  isUnlocked: 0
 --- !u!1 &890020877
 GameObject:
   m_ObjectHideFlags: 0
@@ -7901,6 +7919,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemData: {fileID: 11400000, guid: a28c77acecf7c794ca7a2240092c439f, type: 2}
   smithingUI: {fileID: 1040586841}
+  Icon: {fileID: 890020880}
+  button: {fileID: 890020879}
+  isUnlocked: 1
 --- !u!1 &907870406
 GameObject:
   m_ObjectHideFlags: 0
@@ -8569,6 +8590,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemData: {fileID: 0}
   smithingUI: {fileID: 0}
+  Icon: {fileID: 0}
+  button: {fileID: 0}
+  isUnlocked: 0
 --- !u!1 &1006912235
 GameObject:
   m_ObjectHideFlags: 0
@@ -9200,7 +9224,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: dac8530f9fdd1b14998e6c56031d4418, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -9399,6 +9423,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemData: {fileID: 0}
   smithingUI: {fileID: 0}
+  Icon: {fileID: 0}
+  button: {fileID: 0}
+  isUnlocked: 0
 --- !u!1 &1274392178
 GameObject:
   m_ObjectHideFlags: 0
@@ -9534,6 +9561,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemData: {fileID: 0}
   smithingUI: {fileID: 0}
+  Icon: {fileID: 0}
+  button: {fileID: 0}
+  isUnlocked: 0
 --- !u!1 &1276444464
 GameObject:
   m_ObjectHideFlags: 0
@@ -9669,6 +9699,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemData: {fileID: 0}
   smithingUI: {fileID: 0}
+  Icon: {fileID: 0}
+  button: {fileID: 0}
+  isUnlocked: 0
 --- !u!1 &1355234927
 GameObject:
   m_ObjectHideFlags: 0
@@ -9940,6 +9973,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemData: {fileID: 0}
   smithingUI: {fileID: 0}
+  Icon: {fileID: 0}
+  button: {fileID: 0}
+  isUnlocked: 0
 --- !u!1 &1502545259
 GameObject:
   m_ObjectHideFlags: 0
@@ -10290,6 +10326,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemData: {fileID: 0}
   smithingUI: {fileID: 0}
+  Icon: {fileID: 0}
+  button: {fileID: 0}
+  isUnlocked: 0
 --- !u!1 &1685704143
 GameObject:
   m_ObjectHideFlags: 0
@@ -10639,6 +10678,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemData: {fileID: 0}
   smithingUI: {fileID: 0}
+  Icon: {fileID: 0}
+  button: {fileID: 0}
+  isUnlocked: 0
 --- !u!1 &1864344095
 GameObject:
   m_ObjectHideFlags: 0
@@ -10868,7 +10910,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1040586841}
         m_TargetAssemblyTypeName: SmithingUI, Assembly-CSharp
         m_MethodName: OnClickGameStart
         m_Mode: 1
@@ -11053,6 +11095,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemData: {fileID: 0}
   smithingUI: {fileID: 0}
+  Icon: {fileID: 0}
+  button: {fileID: 0}
+  isUnlocked: 0
 --- !u!1 &2103365829
 GameObject:
   m_ObjectHideFlags: 0
