@@ -10,6 +10,8 @@ public class InventoryManager : MonoBehaviour
     public GameObject slotPrefab;
     public Transform contentParent;
 
+    public ItemSellPopup popupScript;
+
     public List<InventoryItem> myInven = new List<InventoryItem>();
 
     private void Awake()
@@ -27,10 +29,28 @@ public class InventoryManager : MonoBehaviour
         myInven.Add(item);
 
         GameObject slot = Instantiate(slotPrefab, contentParent);
+        InventorySlot slotScript = slot.GetComponent<InventorySlot>();
 
-        slot.GetComponent<InventorySlot>().SetSlot(data, rarity);
-
+        slotScript.SetSlot(item);
 
         Debug.Log($"{data.itemName} {rarity} È¹µæ");
+    }
+
+    public void SellItem(InventorySlot slot, InventoryItem item)
+    {
+        int price = item.GetSellPrice();
+
+        ResourceManager.Instance.AddGold(price);
+
+        myInven.Remove(item);
+
+        Destroy(slot.gameObject);
+
+        Debug.Log($" {item.data.itemName} ÆÇ¸Å ¿Ï·á! +{price}¿ø");
+    }
+
+    public void ShowSellPopup(InventorySlot slot, InventoryItem item)
+    {
+        popupScript.OpenPopup(slot, item);
     }
 }

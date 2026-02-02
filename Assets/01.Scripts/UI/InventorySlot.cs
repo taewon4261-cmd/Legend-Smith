@@ -9,14 +9,23 @@ public class InventorySlot : MonoBehaviour
     public Image iconImage;
     public Image borderImage;
 
-    public void SetSlot(ItemDataSO data, ItemRarity rarity)
-    {
-        iconImage.sprite = data.icon;
+    private InventoryItem itemInfo;
 
-        if (rarity == ItemRarity.Legend) borderImage.color = Color.yellow;
-        else if (rarity == ItemRarity.Epic) borderImage.color = Color.magenta;
-        else if (rarity == ItemRarity.Rare) borderImage.color = Color.blue;
+    public void SetSlot(InventoryItem item)
+    {
+        itemInfo = item;
+
+        iconImage.sprite = item.data.icon;
+
+        if (item.rarity == ItemRarity.Legend) borderImage.color = Color.yellow;
+        else if (item.rarity == ItemRarity.Epic) borderImage.color = Color.magenta;
+        else if (item.rarity == ItemRarity.Rare) borderImage.color = Color.blue;
         else borderImage.color = Color.white;
+    }
+
+    public void OnClickSellButton()
+    {
+        InventoryManager.Instance.ShowSellPopup(this, itemInfo);
     }
 
 }

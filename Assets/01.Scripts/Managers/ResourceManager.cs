@@ -50,4 +50,9 @@ public class ResourceManager : MonoBehaviour
         return false;
 
     }
+
+    public void AddGold(int amount)
+    {
+        gold += amount;
+    }
 }
