@@ -20,6 +20,8 @@ public class SmithingUI : MonoBehaviour
     public Slider timingSlider;
     public GameObject smithingPanelOnBtn; // 스미싱패널버튼인데 패배나 성공후에 인벤에 들어간거 확인하고 x표시나 뒤로가기에서 넣으면 될듯
     public TextMeshProUGUI oreText;
+    public TextMeshProUGUI goldText;
+    public TextMeshProUGUI diaText;
     public Image anvilIcon;
 
     private float targetPosition = 0.5f; // 중심 위치 ()
@@ -59,6 +61,8 @@ public class SmithingUI : MonoBehaviour
         if (ResourceManager.Instance != null)
         {
             oreText.text = $"{ResourceManager.Instance.currentIron}";
+            goldText.text = $"{ResourceManager.Instance.gold}";
+            diaText.text = $"{ResourceManager.Instance.diamond}";
         }
 
         if (timingSlider == null || isPuased || !isPlaying) return;

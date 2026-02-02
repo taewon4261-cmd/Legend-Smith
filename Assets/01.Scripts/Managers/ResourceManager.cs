@@ -7,8 +7,13 @@ public class ResourceManager : MonoBehaviour
 {
     public static ResourceManager Instance;
 
+
+    [Header ("ÀÚ¿ø")]
     public int currentIron = 0;
     public int ironPerSecond = 1;
+    public int gold;
+    public int diamond;
+
 
     private void Awake()
     {
