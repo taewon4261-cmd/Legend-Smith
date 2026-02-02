@@ -917,8 +917,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: d640344121aacd045a62c4480d99b324, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -947,10 +947,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 838fa555d4a0ce64a894d801bdc7a2f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemData: {fileID: 0}
-  smithingUI: {fileID: 0}
-  Icon: {fileID: 0}
-  button: {fileID: 0}
+  itemData: {fileID: 11400000, guid: 5069cb4f754ef1f49b6e5f1daa5e5b76, type: 2}
+  smithingUI: {fileID: 1040586841}
+  Icon: {fileID: 350657552}
+  button: {fileID: 350657551}
   isUnlocked: 0
 --- !u!1 &353445270
 GameObject:
@@ -1055,8 +1055,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 50d5cee62c101cb4db5baa77b4cb95dd, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -1085,8 +1085,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 838fa555d4a0ce64a894d801bdc7a2f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemData: {fileID: 0}
-  smithingUI: {fileID: 0}
+  itemData: {fileID: 11400000, guid: 19359f02f5dd08340b617198a0a4f163, type: 2}
+  smithingUI: {fileID: 1040586841}
   Icon: {fileID: 0}
   button: {fileID: 0}
   isUnlocked: 0
@@ -6047,11 +6047,11 @@ Transform:
   m_GameObject: {fileID: 361149462}
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 35, y: 20, z: 0}
+  m_LocalPosition: {x: 15, y: 170, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1006912236}
+  m_Father: {fileID: 822822384}
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!1 &386797076
 GameObject:
@@ -6695,8 +6695,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 77e631a06979d414ebc849f17e083618, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -6725,10 +6725,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 838fa555d4a0ce64a894d801bdc7a2f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemData: {fileID: 0}
-  smithingUI: {fileID: 0}
-  Icon: {fileID: 0}
-  button: {fileID: 0}
+  itemData: {fileID: 11400000, guid: 2430374a7c480e54da455dc1c37afb3b, type: 2}
+  smithingUI: {fileID: 1040586841}
+  Icon: {fileID: 604073128}
+  button: {fileID: 604073127}
   isUnlocked: 0
 --- !u!1 &632442823
 GameObject:
@@ -6833,8 +6833,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: b9ae0ebe95283fd4984b3a77baac088e, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -6863,10 +6863,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 838fa555d4a0ce64a894d801bdc7a2f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemData: {fileID: 0}
-  smithingUI: {fileID: 0}
-  Icon: {fileID: 0}
-  button: {fileID: 0}
+  itemData: {fileID: 11400000, guid: 136a56fa05d66ba4489d0d28b9df35d9, type: 2}
+  smithingUI: {fileID: 1040586841}
+  Icon: {fileID: 632442826}
+  button: {fileID: 632442825}
   isUnlocked: 0
 --- !u!1 &637488639
 GameObject:
@@ -7007,8 +7007,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 2f27907f61b64a54098e8e50db9ff448, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -7037,8 +7037,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 838fa555d4a0ce64a894d801bdc7a2f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemData: {fileID: 0}
-  smithingUI: {fileID: 0}
+  itemData: {fileID: 11400000, guid: e558a280f06144943bd9a79ffbd24907, type: 2}
+  smithingUI: {fileID: 1040586841}
   Icon: {fileID: 0}
   button: {fileID: 0}
   isUnlocked: 0
@@ -7589,6 +7589,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1170044527}
+  - {fileID: 361149465}
   m_Father: {fileID: 1502545263}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -7737,8 +7738,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: a6bcdf5cf8ce66e4ab9e772fb45357f1, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -7767,8 +7768,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 838fa555d4a0ce64a894d801bdc7a2f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemData: {fileID: 0}
-  smithingUI: {fileID: 0}
+  itemData: {fileID: 11400000, guid: f20df561daa91334c90857a5256dcf8e, type: 2}
+  smithingUI: {fileID: 1040586841}
   Icon: {fileID: 0}
   button: {fileID: 0}
   isUnlocked: 0
@@ -7854,19 +7855,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 890020880}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 890020882}
-        m_TargetAssemblyTypeName: CraftingSlot, Assembly-CSharp
-        m_MethodName: OnClickSelectThis
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &890020880
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7887,7 +7876,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 84e2b08bb29d8ac41986895587f40234, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c2ce80b27fa265943aab917372b7ed28, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -8558,8 +8547,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 89647f7aa1935774d93f922081fa337b, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -8588,10 +8577,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 838fa555d4a0ce64a894d801bdc7a2f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemData: {fileID: 0}
-  smithingUI: {fileID: 0}
-  Icon: {fileID: 0}
-  button: {fileID: 0}
+  itemData: {fileID: 11400000, guid: 4ed1a2d70f4efac47a06d03609a749c8, type: 2}
+  smithingUI: {fileID: 1040586841}
+  Icon: {fileID: 1005682842}
+  button: {fileID: 1005682841}
   isUnlocked: 0
 --- !u!1 &1006912235
 GameObject:
@@ -8622,8 +8611,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 361149465}
+  m_Children: []
   m_Father: {fileID: 1502545263}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -9391,8 +9379,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: a2f4742685df0f94e8b3cbbcdba7c360, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -9421,8 +9409,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 838fa555d4a0ce64a894d801bdc7a2f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemData: {fileID: 0}
-  smithingUI: {fileID: 0}
+  itemData: {fileID: 11400000, guid: 3da15a8d87ce76b469fd6949177129a0, type: 2}
+  smithingUI: {fileID: 1040586841}
   Icon: {fileID: 0}
   button: {fileID: 0}
   isUnlocked: 0
@@ -9529,8 +9517,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: ee948ca4635851d40b3a1d42bcac9b90, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -9559,8 +9547,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 838fa555d4a0ce64a894d801bdc7a2f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemData: {fileID: 0}
-  smithingUI: {fileID: 0}
+  itemData: {fileID: 11400000, guid: a81f244e48b4f5848a31f54dbb14d9a2, type: 2}
+  smithingUI: {fileID: 1040586841}
   Icon: {fileID: 0}
   button: {fileID: 0}
   isUnlocked: 0
@@ -9667,8 +9655,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 1fe02d8e96eb8984c8f7ec931702b93c, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -9697,8 +9685,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 838fa555d4a0ce64a894d801bdc7a2f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemData: {fileID: 0}
-  smithingUI: {fileID: 0}
+  itemData: {fileID: 11400000, guid: 65ba1b55534b3e74e9d66413f7880fbf, type: 2}
+  smithingUI: {fileID: 1040586841}
   Icon: {fileID: 0}
   button: {fileID: 0}
   isUnlocked: 0
@@ -9941,8 +9929,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 4a63ecb88f8ede34eb987a3e8c8a66e7, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -9971,10 +9959,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 838fa555d4a0ce64a894d801bdc7a2f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemData: {fileID: 0}
-  smithingUI: {fileID: 0}
-  Icon: {fileID: 0}
-  button: {fileID: 0}
+  itemData: {fileID: 11400000, guid: 113119db1eff28a428384ad0f98a7ba6, type: 2}
+  smithingUI: {fileID: 1040586841}
+  Icon: {fileID: 1402772881}
+  button: {fileID: 1402772880}
   isUnlocked: 0
 --- !u!1 &1502545259
 GameObject:
@@ -10294,8 +10282,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 585552d03187cbd4cbe6d282710f6ecb, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -10324,8 +10312,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 838fa555d4a0ce64a894d801bdc7a2f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemData: {fileID: 0}
-  smithingUI: {fileID: 0}
+  itemData: {fileID: 11400000, guid: 323ecf795cd775349bf90937465f6b7b, type: 2}
+  smithingUI: {fileID: 1040586841}
   Icon: {fileID: 0}
   button: {fileID: 0}
   isUnlocked: 0
@@ -10646,8 +10634,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: a8c8b9f085bf52e4a9a5d13333d8b783, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -10676,8 +10664,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 838fa555d4a0ce64a894d801bdc7a2f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemData: {fileID: 0}
-  smithingUI: {fileID: 0}
+  itemData: {fileID: 11400000, guid: 8497d73b54dad814ba0394456f4ba2ea, type: 2}
+  smithingUI: {fileID: 1040586841}
   Icon: {fileID: 0}
   button: {fileID: 0}
   isUnlocked: 0
@@ -11063,8 +11051,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: b75fbb242fb21464994bbb6c4c67990e, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -11093,10 +11081,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 838fa555d4a0ce64a894d801bdc7a2f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemData: {fileID: 0}
-  smithingUI: {fileID: 0}
-  Icon: {fileID: 0}
-  button: {fileID: 0}
+  itemData: {fileID: 11400000, guid: 63a280c4622d77e46bed518467b56ea9, type: 2}
+  smithingUI: {fileID: 1040586841}
+  Icon: {fileID: 2076946493}
+  button: {fileID: 2076946492}
   isUnlocked: 0
 --- !u!1 &2103365829
 GameObject:

@@ -19,20 +19,20 @@ public class CraftingSlot : MonoBehaviour
     [Header("잠금 설정")]
     public bool isUnlocked;
 
-    private void Start()
+    private void Awake()
     {
         if(Icon == null) Icon = GetComponent<Image>();
         if(button == null) button = GetComponent<Button>();
-      
+        Init();
 
-        if (isUnlocked)
-        {
-            UnlockSlot(); // 체크되어 있으면 해금 상태로 시작
-        }
-        else
-        {
-            LockSlot();   // 아니면 잠금
-        }
+        if (isUnlocked) UnlockSlot();
+        else LockSlot();
+    }
+
+    void Init()
+    {
+        button.onClick.RemoveAllListeners();
+        button.onClick.AddListener(OnClickSelectThis);
     }
 
     public void LockSlot()

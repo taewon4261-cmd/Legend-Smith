@@ -14,7 +14,7 @@ public class SmithingUI : MonoBehaviour
     public SmithingDifficultySO difficultyData;
     public SmithingRateSO rateData;
     public ItemDataSO currentTargetItem; // 선택된 아이템
-
+  
     [Header("UI")]
     public Image targetZoneImage;
     public Slider timingSlider;
@@ -109,6 +109,8 @@ public class SmithingUI : MonoBehaviour
             Debug.Log($"실패...");
         }
     }
+
+  
     public void OnButtonChallenge() // 추가 도전버튼
     {
         choicePopup.SetActive(false);

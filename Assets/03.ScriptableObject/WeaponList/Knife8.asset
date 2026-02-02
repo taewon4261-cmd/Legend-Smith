@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1cbc2575ac4849c49b3acb3fa23707f0, type: 3}
-  m_Name: Stone Sword
+  m_Name: Knife8
   m_EditorClassIdentifier: 
-  itemName: "\uAC15\uCCA0\uAC80"
-  icon: {fileID: 21300000, guid: c2ce80b27fa265943aab917372b7ed28, type: 3}
-  cost: 100
-  price: 100
+  itemName: "\uB3CC\uAC80"
+  icon: {fileID: 21300000, guid: 585552d03187cbd4cbe6d282710f6ecb, type: 3}
+  cost: 430
+  price: 516
+  unlockedPrice: 128000

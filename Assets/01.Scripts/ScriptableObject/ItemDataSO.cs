@@ -10,4 +10,5 @@ public class ItemDataSO : ScriptableObject
     public Sprite icon;
     public int cost;
     public int price;
+    public int unlockedPrice;
 }
