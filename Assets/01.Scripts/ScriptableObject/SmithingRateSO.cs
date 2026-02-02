@@ -6,28 +6,24 @@ using UnityEngine;
 public class SmithingRateSO : ScriptableObject
 {
     [Header("확률 설정")]
-    [Range(0, 100)] public int normalRate = 60;
-    [Range(0, 100)] public int rareRate = 30;
-    [Range(0, 100)] public int epciRate = 9;
-    [Range(0, 100)] public int legendRate = 1;
+     public int normalRate = 60;
+     public int rareRate = 90;
+     public int epicRate = 99;
 
 
     // 등급을 체크해주는 함수
-    public ItemRarity GetRandomRarity()
+    public ItemRarity GetRandomRarity(int luckBonus)
     {
 
-        int randomVal = Random.Range(0, 100); // 0 ~ 99까지
-        int currentRate = 0;
+        int randomVal = Random.Range(0, 100) + luckBonus;
 
-        currentRate += normalRate;
-        if (randomVal < currentRate) return ItemRarity.Normal;
+        Debug.Log($"주사위 : {randomVal - luckBonus} + 보너스 {luckBonus} + 최종 {randomVal}");
 
-        currentRate += rareRate;
-        if (randomVal < currentRate) return ItemRarity.Rare;
+        //낮은 숫자부터 검사
 
-        currentRate += epciRate;
-        if (randomVal < currentRate) return ItemRarity.Epic;
-
+        if (randomVal <= normalRate) return ItemRarity.Normal;
+        if (randomVal <= rareRate) return ItemRarity.Rare;
+        if (randomVal <= epicRate) return ItemRarity.Epic;
         return ItemRarity.Legend;
     }
 }

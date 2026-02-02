@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cbc2575ac4849c49b3acb3fa23707f0, type: 3}
   m_Name: Knife14
   m_EditorClassIdentifier: 
-  itemName: "\uB3CC\uAC80"
+  itemName: "\uB300\uCC9C\uC0AC\uC758 \uC131\uAC80"
   icon: {fileID: 21300000, guid: ee948ca4635851d40b3a1d42bcac9b90, type: 3}
   cost: 1284
   price: 1541

@@ -6,6 +6,10 @@ public class InventoryManager : MonoBehaviour
 {
     public static InventoryManager Instance;
 
+    [Header("¿Œ∫•≈‰∏Æ ø¨∞·")]
+    public GameObject slotPrefab;
+    public Transform contentParent;
+
     public List<InventoryItem> myInven = new List<InventoryItem>();
 
     private void Awake()
@@ -21,6 +25,11 @@ public class InventoryManager : MonoBehaviour
         item.rarity = rarity;
 
         myInven.Add(item);
+
+        GameObject slot = Instantiate(slotPrefab, contentParent);
+
+        slot.GetComponent<InventorySlot>().SetSlot(data, rarity);
+
 
         Debug.Log($"{data.itemName} {rarity} »πµÊ");
     }

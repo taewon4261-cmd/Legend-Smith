@@ -122,6 +122,54 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &10821060
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 10821062}
+  - component: {fileID: 10821061}
+  m_Layer: 0
+  m_Name: InventoryManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &10821061
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 10821060}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abb869eb472ca804f8f7a247dd7dc4e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slotPrefab: {fileID: 2031381179932146035, guid: 330a2835a2df8d243b7ea3d4d4882a7e,
+    type: 3}
+  contentParent: {fileID: 304365789}
+  myInven: []
+--- !u!4 &10821062
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 10821060}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.199685, y: 21.909399, z: 91.50935}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &125419244
 GameObject:
   m_ObjectHideFlags: 0
@@ -510,7 +558,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ceba28464a8d72c4a890d5391b0a5f65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentIron: 100
+  currentIron: 10000
   ironPerSecond: 1
   gold: 0
   diamond: 0
@@ -540,6 +588,7 @@ GameObject:
   - component: {fileID: 304365789}
   - component: {fileID: 304365791}
   - component: {fileID: 304365790}
+  - component: {fileID: 304365792}
   m_Layer: 5
   m_Name: Inven
   m_TagString: Untagged
@@ -604,6 +653,30 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 304365788}
   m_CullTransparentMesh: 1
+--- !u!114 &304365792
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 304365788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a8695521f0d02e499659fee002a26c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 80
+    m_Right: 0
+    m_Top: 80
+    m_Bottom: 0
+  m_ChildAlignment: 0
+  m_StartCorner: 0
+  m_StartAxis: 0
+  m_CellSize: {x: 55, y: 55}
+  m_Spacing: {x: 40, y: 15}
+  m_Constraint: 0
+  m_ConstraintCount: 2
 --- !u!1 &319759010
 GameObject:
   m_ObjectHideFlags: 0
@@ -11413,3 +11486,4 @@ SceneRoots:
   - {fileID: 996150869}
   - {fileID: 1234940279}
   - {fileID: 275356582}
+  - {fileID: 10821062}

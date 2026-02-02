@@ -156,12 +156,9 @@ public class SmithingUI : MonoBehaviour
 
     void AddToInventory()
     {
-        ItemRarity finalRarity = ItemRarity.Normal; // ½ÇÆÐ ½Ã ³ë¸»
+        int bonusLuck = currentCombo * 4;
 
-        if (currentCombo >= maxCombo)
-        {
-            finalRarity = rateData.GetRandomRarity(); // ÄÞº¸ ¼ö¿¡ µû¸¥ È®·ü »ó½Â
-        }
+       ItemRarity finalRarity = rateData.GetRandomRarity(bonusLuck);
 
         InventoryManager.Instance.AddItem(currentItem, finalRarity);
 

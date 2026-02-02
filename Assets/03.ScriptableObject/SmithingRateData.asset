@@ -13,6 +13,5 @@ MonoBehaviour:
   m_Name: SmithingRateData
   m_EditorClassIdentifier: 
   normalRate: 60
-  rareRate: 30
-  epciRate: 9
-  legendRate: 1
+  rareRate: 90
+  epicRate: 99
