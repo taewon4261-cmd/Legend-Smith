@@ -16,8 +16,25 @@ public class CraftingSlot : MonoBehaviour
     private readonly Color lockedColor = new Color(0, 0, 0, 0.5f); // Color은 구조체라 GC 관여없음
     private readonly Color unlockedColor = Color.white;
 
-    [Header("잠금 설정")]
-    public bool isUnlocked;
+    //[Header("잠금 설정")]
+    //public bool isUnlocked;
+
+    private void OnEnable()
+    {
+        if (itemData == null) return;
+
+        bool result = UnlockManager.Instance.CheckUnlock(itemData);
+
+        if (result == true)
+        {
+            UnlockSlot();
+        }
+        else
+        {
+            LockSlot();
+        }
+
+    }
 
     private void Awake()
     {
@@ -25,8 +42,8 @@ public class CraftingSlot : MonoBehaviour
         if(button == null) button = GetComponent<Button>();
         Init();
 
-        if (isUnlocked) UnlockSlot();
-        else LockSlot();
+        //if (isUnlocked) UnlockSlot();
+        //else LockSlot();
     }
 
     void Init()
@@ -39,14 +56,14 @@ public class CraftingSlot : MonoBehaviour
     {
         Icon.color = lockedColor;
         button.interactable = false; // 클릭 불가
-        isUnlocked = false;
+        //isUnlocked = false;
     }
 
     public void UnlockSlot()
     {
         Icon.color = unlockedColor;
         button.interactable = true;
-        isUnlocked = true;
+        //isUnlocked = true;
     }
 
     public void OnClickSelectThis()

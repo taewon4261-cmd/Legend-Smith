@@ -11,4 +11,7 @@ public class ItemDataSO : ScriptableObject
     public int cost;
     public int price;
     public int unlockedPrice;
+
+    [Header("¼³Á¤")]
+    public bool isDefaultUnlocked;
 }
