@@ -1,7 +1,9 @@
+using Cysharp.Threading.Tasks;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
-using Cysharp.Threading.Tasks;
 
 public class ResourceManager : MonoBehaviour
 {
@@ -9,11 +11,15 @@ public class ResourceManager : MonoBehaviour
 
 
     [Header ("ÀÚ¿ø")]
-    public int currentIron = 0;
-    public int ironPerSecond = 1;
+    public int currentOre = 0;
+    public int orePerSecond = 1;
     public int gold;
     public int diamond;
 
+    [Header("UI")]
+    public TextMeshProUGUI oreText;
+    public TextMeshProUGUI goldText;
+    public TextMeshProUGUI diaText;
 
     private void Awake()
     {
@@ -27,24 +33,29 @@ public class ResourceManager : MonoBehaviour
 
     private void Start()
     {
+        UpdateAllUI();
         Income().Forget();
     }
-
 
     async UniTaskVoid Income()
     {
         while (true)
         {
-            currentIron += ironPerSecond;
             await UniTask.Delay(1000, cancellationToken: this.GetCancellationTokenOnDestroy());
+            currentOre += orePerSecond;
+
+            UpdateOreUI();
         }
     }
 
-    public bool TrySpendIron(int amount)
+    public bool TrySpendOre(int amount)
     {
-        if (currentIron >= amount)
+        if (currentOre >= amount)
         {
-            currentIron -= amount;
+            currentOre -= amount;
+
+            UpdateOreUI();
+
             return true;
         }
         return false;
@@ -54,5 +65,26 @@ public class ResourceManager : MonoBehaviour
     public void AddGold(int amount)
     {
         gold += amount;
+        UpdateGoldUI();
+    }
+
+    void UpdateAllUI()
+    {
+        UpdateOreUI();
+        UpdateGoldUI();
+        UpdateDiaUI();
+    }
+    void UpdateOreUI()
+    {
+        oreText.text = $"{currentOre}";
+    }
+    void UpdateGoldUI()
+    {
+        goldText.text = $"{gold}";
+    }
+    
+    void UpdateDiaUI()
+    {
+        diaText.text = $"{diamond}";
     }
 }
