@@ -10567,8 +10567,8 @@ MonoBehaviour:
   slotPrefab: {fileID: 3089916043016134417, guid: 233c24dd27592bf45b0d9d2f999a0b1f,
     type: 3}
   weaponDBSO: {fileID: 11400000, guid: a4d950e57e5c57d4fab67b0bf6b8189c, type: 2}
-  unlockBtn: {fileID: 0}
-  unlockBtnText: {fileID: 0}
+  unlockBtn: {fileID: 1707651517}
+  unlockBtnText: {fileID: 2085843510}
   icon: {fileID: 1019704723}
   nameText: {fileID: 1576012475}
   costText: {fileID: 1673566259}

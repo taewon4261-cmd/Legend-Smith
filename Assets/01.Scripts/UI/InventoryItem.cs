@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 
@@ -16,6 +14,7 @@ public class InventoryItem
         if (rarity == ItemRarity.Epic) multiplier = 2f;
         if (rarity == ItemRarity.Legend) multiplier = 5f;
       
+        // 반올림 함수
         return Mathf.RoundToInt(data.price * multiplier);
     }
 

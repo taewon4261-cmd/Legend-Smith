@@ -1,9 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
-using Cysharp.Threading.Tasks;
-using TMPro;
 
 public class SmithingUI : MonoBehaviour
 {
@@ -14,7 +11,7 @@ public class SmithingUI : MonoBehaviour
     public SmithingDifficultySO difficultyData;
     public SmithingRateSO rateData;
     public ItemDataSO currentTargetItem; // 선택된 아이템
-  
+
     [Header("UI")]
     public Image targetZoneImage;
     public Slider timingSlider;
@@ -65,29 +62,25 @@ public class SmithingUI : MonoBehaviour
     public void CheckHit()
     {
         if (!isPlaying) return;
-       
+
         float currentVal = timingSlider.value; ;
 
         float diff = currentVal - targetPosition;
-        float distance = Mathf.Abs(diff);
+
+        // abs로 만든 이유 : 거리만 계산해서 판정했을땐 - 수치일때 모두 true반정이 나옴
+        float distance = Mathf.Abs(diff); 
 
         if (distance <= tolerance) // 성공
         {
             isPuased = true;
 
             SmithingEffect(true).Forget(); // 이미지 바 색 변경으로 직관적 이미지 표현
-            if (hitEffect != null)
-            {
-                hitEffect.Play();
-            }
-            if (currentCombo >= maxCombo)
-            {
-                AddToInventory();
-            }
-            else
-            {
-                choicePopup.SetActive(true);
-            }
+
+            if (hitEffect != null) hitEffect.Play(); // 히트이펙트
+            
+            if (currentCombo >= maxCombo) AddToInventory();
+            else choicePopup.SetActive(true);
+           
         }
         else // 실패
         {
@@ -97,13 +90,11 @@ public class SmithingUI : MonoBehaviour
 
             AddToInventory();
             SetDifficulty();
-
-            Debug.Log($"실패...");
         }
     }
 
-  
-    public void OnButtonChallenge() // 추가 도전버튼
+    // 추가 도전버튼
+    public void OnButtonChallenge()
     {
         choicePopup.SetActive(false);
 
@@ -116,12 +107,16 @@ public class SmithingUI : MonoBehaviour
         isPuased = false;
     }
 
-    public void OnButtonKeep() // 그만하기 버튼
+
+    // 그만하기 버튼
+    public void OnButtonKeep() 
     {
         choicePopup.SetActive(false);
         AddToInventory();
     }
-    public void OnClickGameStart() // 핸들 움직이기 시작 버튼
+
+    // 핸들 움직이기 시작 버튼
+    public void OnClickGameStart()
     {
         if (isPlaying) return;
 
@@ -137,7 +132,6 @@ public class SmithingUI : MonoBehaviour
         }
         else
         {
-            Debug.Log("자원 부족");
             // TODO : 실패 연출 넣기? 깜빡임 or 텍스트? 진동?
         }
     }
@@ -146,21 +140,20 @@ public class SmithingUI : MonoBehaviour
     {
         int bonusLuck = currentCombo * 1; // 콤보당 확률 1씩 증가
 
-       ItemRarity finalRarity = rateData.GetRandomRarity(bonusLuck);
+        ItemRarity finalRarity = rateData.GetRandomRarity(bonusLuck);
 
         InventoryManager.Instance.AddItem(currentItem, finalRarity);
-
-        Debug.Log($"제작 완료. 등급 {finalRarity} / 콤보 : {currentCombo}");
 
         isPlaying = false;
 
         currentCombo = 0;
-        SetDifficulty();
-        UpdateComboUI();
+        SetDifficulty(); //다음 난이도
+        UpdateComboUI(); // 별 추가
         timingSlider.value = 0;
         isPuased = false;
     }
 
+    // 난이도조절SO를 불러와서 업데이트
     void SetDifficulty()
     {
         var data = difficultyData.GetLevelData(currentCombo);
@@ -173,6 +166,10 @@ public class SmithingUI : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// 클릭한 아이템의 정보를 보내주는 함수
+    /// </summary>
+    /// <param name="newitem"></param>
     public void SetTargetItem(ItemDataSO newitem)
     {
         currentItem = newitem;
@@ -184,7 +181,8 @@ public class SmithingUI : MonoBehaviour
         }
     }
 
-    void UpdateTargetZoneUI(float currentTol) // 난이도 상승 시 타겟범위 변경 함수
+    // 난이도 상승 시 타겟범위 변경 함수
+    void UpdateTargetZoneUI(float currentTol)
     {
         RectTransform rect = targetZoneImage.rectTransform;
 
@@ -198,22 +196,17 @@ public class SmithingUI : MonoBehaviour
         rect.offsetMax = Vector2.zero;
     }
 
-    void UpdateComboUI() // 성급 출력
+    // 성급 출력
+    void UpdateComboUI()
     {
         for (int i = 0; i < comboStars.Length; i++)
         {
-            if (i < currentCombo)
-            {
-                comboStars[i].SetActive(true);
-            }
-            else
-            {
-                comboStars[i].SetActive(false);
-            }
-            
+            if (i < currentCombo) comboStars[i].SetActive(true);
+            else comboStars[i].SetActive(false);
         }
     }
 
+    // 클릭시 성공 실패 색상처리
     async UniTaskVoid SmithingEffect(bool isSuccess)
     {
         if (isSuccess == true)

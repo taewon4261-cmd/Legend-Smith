@@ -29,7 +29,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f20df561daa91334c90857a5256dcf8e, type: 2}
   - {fileID: 11400000, guid: a81f244e48b4f5848a31f54dbb14d9a2, type: 2}
   startCost: 100
-  costMultiplier: 1.2
+  costMultiplier: 1.5
   startPrice: 120
   priceMultiplier: 1.2
   unlockedPrice: 500

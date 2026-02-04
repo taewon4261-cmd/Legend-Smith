@@ -1,8 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Search;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -16,14 +12,8 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        if (smithingPanel != null)
-        {
-            smithingPanel.gameObject.SetActive(false);
-        }
-        if (storePanel != null)
-        {
-            storePanel.gameObject.SetActive(false);
-        }
+        //모든 서브 패널 비활성화 함수
+        InitPanels();
     }
 
     public void ShowSmithingPanel()
@@ -59,4 +49,10 @@ public class GameManager : MonoBehaviour
         storePanelBtn.SetActive(true);
     }
 
+    // 시작시 서브 패널들 비활성화
+    private void InitPanels()
+    {
+        if (smithingPanel != null) smithingPanel.SetActive(false);
+        if (storePanel != null) storePanel.SetActive(false);
+    }
 }
