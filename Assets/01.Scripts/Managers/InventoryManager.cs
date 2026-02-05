@@ -22,8 +22,8 @@ public class InventoryManager : MonoBehaviour
     /// <summary>
     ///  새로운 아이템을 획득하여 리스트에 추가하고 실제 UI 슬롯을 생성하는 함수
     /// </summary>
-    /// <param name="data"></param>
-    /// <param name="rarity"></param>
+    /// <param name="data"> 아이템 정보 SO </param>
+    /// <param name="rarity"> 아이템 등급 </param>
     public void AddItem(ItemDataSO data, ItemRarity rarity)
     {
         // 데이터 생성 및 리스트 추가
@@ -41,8 +41,8 @@ public class InventoryManager : MonoBehaviour
     /// <summary>
     /// 아이템을 판매하여 골드를 획득하고 목록에서 제거하는 함수
     /// </summary>
-    /// <param name="slot"></param>
-    /// <param name="item"></param>
+    /// <param name="slot"> 제거할 UI 슬롯 </param>
+    /// <param name="item"> 제거할 아이템 데이터 </param>
     public void SellItem(InventorySlot slot, InventoryItem item)
     {
         // 판매금액 매니저에 반영

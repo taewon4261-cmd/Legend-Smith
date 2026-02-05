@@ -13,7 +13,7 @@ public class InventorySlot : MonoBehaviour
     /// <summary>
     /// 슬롯에 아이템 데이터를 할당하고 등급에 맞춰 UI 갱신
     /// </summary>
-    /// <param name="item"></param>
+    /// <param name="item"> 인벤토리에 저장된 아이템 데이터 </param>
     public void SetSlot(InventoryItem item)
     {
         itemInfo = item;

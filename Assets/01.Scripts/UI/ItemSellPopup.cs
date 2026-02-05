@@ -19,8 +19,8 @@ public class ItemSellPopup : MonoBehaviour
     /// <summary>
     /// 인벤토리 슬롯 클릭 시 호출되어 팝업을 열고 아이템 정보 세팅
     /// </summary>
-    /// <param name="slot"></param>
-    /// <param name="item"></param>
+    /// <param name="slot"> 아이템이 소속된 인벤토리 슬롯 </param>
+    /// <param name="item"> 판매 대상 아이템 정보 </param>
     public void OpenPopup(InventorySlot slot, InventoryItem item)
     {
         // 아이템 데이터 보관

@@ -78,9 +78,9 @@ public class WeaponStoreUI : MonoBehaviour
         if (UnlockManager.Instance.CheckUnlock(currentTarget)) return;
 
         //재화 확인 및 차감
-        if (ResourceManager.Instance.gold >= currentTarget.cost)
+        if (ResourceManager.Instance.gold >= currentTarget.unlockedPrice)
         {
-            ResourceManager.Instance.AddGold(-currentTarget.cost);
+            ResourceManager.Instance.AddGold(-currentTarget.unlockedPrice);
 
             // PlayerPrefs에 저장 및 즉시 반영
             UnlockManager.Instance.PurchaseWeapon(currentTarget);

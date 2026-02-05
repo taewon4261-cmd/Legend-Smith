@@ -10,8 +10,8 @@ public class WeaponShopSlot : MonoBehaviour
     /// <summary>
     /// 상점 생성 시 호출되어 무기 데이터와 UI 매니저를 연결
     /// </summary>
-    /// <param name="newData"></param>
-    /// <param name="manager"></param>
+    /// <param name="newData"> 할당할 무기 데이터 </param>
+    /// <param name="manager"> 상점 메인 UI 스크립트 </param>
     public void SetWeaponSlot(ItemDataSO newData, WeaponStoreUI manager)
     {
         data = newData;
