@@ -7,6 +7,12 @@ public class InventoryItem
     public ItemDataSO data;
     public ItemRarity rarity;
 
+    public InventoryItem(ItemDataSO data, ItemRarity rarity)
+    {
+        this.data = data;
+        this.rarity = rarity;
+    }
+
     public int GetSellPrice()
     {
         float multiplier = 1f;

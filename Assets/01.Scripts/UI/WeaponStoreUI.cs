@@ -4,7 +4,6 @@ using UnityEngine.UI;
 
 public class WeaponStoreUI : MonoBehaviour
 {
-
     [Header("Weapon Prefab")]
     public Transform gridContent;
     public GameObject slotPrefab;
@@ -74,7 +73,6 @@ public class WeaponStoreUI : MonoBehaviour
         }
     }
 
-
     // 해금 버튼 클릭 시 실제 구매 프로세스 수행
     public void OnClickPurchaseBtn()
     {
@@ -97,7 +95,5 @@ public class WeaponStoreUI : MonoBehaviour
         {
             // TOOD :  돈 부족 팝업 출력 하거나 안하거나
         }
-
     }
-
 }

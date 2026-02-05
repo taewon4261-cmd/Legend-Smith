@@ -151,6 +151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abb869eb472ca804f8f7a247dd7dc4e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponDB: {fileID: 11400000, guid: a4d950e57e5c57d4fab67b0bf6b8189c, type: 2}
   slotPrefab: {fileID: 2031381179932146035, guid: 330a2835a2df8d243b7ea3d4d4882a7e,
     type: 3}
   contentParent: {fileID: 304365789}

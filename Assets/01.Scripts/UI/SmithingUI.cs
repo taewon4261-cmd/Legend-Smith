@@ -156,6 +156,11 @@ public class SmithingUI : MonoBehaviour
     {
         if (isPlaying) return;
 
+        if (InventoryManager.Instance.myInven.Count >= 15)
+        {
+            return;
+        }
+
         bool isSuccess = ResourceManager.Instance.TrySpendOre(currentItem.cost);
 
         if (isSuccess)
