@@ -1,21 +1,29 @@
 using Cysharp.Threading.Tasks;
+using TMPro;
+using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class SmithingUI : MonoBehaviour
 {
-    [Header("제작 타겟")]
-    public ItemDataSO currentItem;
+    [Header("Weapon Prefab")]
+    public Transform gridContent;
+    public GameObject craftingSlot;
 
     [Header("SO")]
     public SmithingDifficultySO difficultyData;
     public SmithingRateSO rateData;
     public ItemDataSO currentTargetItem; // 선택된 아이템
+    public WeaponDBSO weaponDBSO;
 
     [Header("UI")]
     public Image targetZoneImage;
     public Slider timingSlider;
+
+    [Header("Target UI")]
     public Image anvilIcon;
+    public TextMeshProUGUI WeaponName;
+    public TextMeshProUGUI WeaponCost;
 
     private float targetPosition = 0.5f; // 중심 위치 ()
     private float tolerance = 0.1f; // 난이도 조절
@@ -24,13 +32,16 @@ public class SmithingUI : MonoBehaviour
     public GameObject[] comboStars;
     private int currentCombo = 0;
     private int maxCombo = 5;
-
+    
     [Header("성공 후 팝업창")]
     public GameObject choicePopup;
     private bool isPuased;
 
     [Header("이펙트")]
     public ParticleSystem hitEffect;
+
+    [Header("제작 타겟")]
+    public ItemDataSO currentItem;
 
     private float currentSpeed;
     private float currentTolerance;
@@ -46,6 +57,11 @@ public class SmithingUI : MonoBehaviour
 
         UpdateComboUI(); // 별 갯수 0개로 초기화
         SetDifficulty(); // 난이도 초기화
+
+        CreateWeaponSlots();
+
+
+        ResetUIState();
     }
 
     void Update()
@@ -91,6 +107,26 @@ public class SmithingUI : MonoBehaviour
             AddToInventory();
             SetDifficulty();
         }
+    }
+    void CreateWeaponSlots()
+    {
+        foreach (var weapon in weaponDBSO.allWeapon)
+        {
+            GameObject newWeapon = Instantiate(craftingSlot, gridContent);
+            CraftingSlot slot = newWeapon.GetComponent<CraftingSlot>();
+
+            slot.Setup(weapon, this);
+        }
+    }
+
+    void ResetUIState()
+    {
+
+        if (anvilIcon != null) anvilIcon.gameObject.SetActive(false);
+        if (WeaponName != null) WeaponName.gameObject.SetActive(false);
+        if (WeaponCost != null) WeaponCost.gameObject.SetActive(false);
+
+        currentItem = null;
     }
 
     // 추가 도전버튼
@@ -169,17 +205,32 @@ public class SmithingUI : MonoBehaviour
     /// <summary>
     /// 클릭한 아이템의 정보를 보내주는 함수
     /// </summary>
-    /// <param name="newitem"></param>
-    public void SetTargetItem(ItemDataSO newitem)
+    /// <param name="newItem"></param>
+    public void SetTargetItem(ItemDataSO newItem)
     {
-        currentItem = newitem;
+        if (newItem == null) return;
 
-        if (newitem.icon != null)
+        currentItem = newItem;
+
+        if (anvilIcon != null)
         {
-            anvilIcon.sprite = newitem.icon;
+            anvilIcon.sprite = newItem.icon;
             anvilIcon.gameObject.SetActive(true);
         }
+
+        if (WeaponName != null)
+        {
+            WeaponName.text = newItem.itemName;
+            WeaponName.gameObject.SetActive(true); // 다시 켜기!
+        }
+
+        if (WeaponCost != null)
+        {
+            WeaponCost.text = $"{newItem.cost} Ore";
+            WeaponCost.gameObject.SetActive(true); // 다시 켜기!
+        }
     }
+       
 
     // 난이도 상승 시 타겟범위 변경 함수
     void UpdateTargetZoneUI(float currentTol)

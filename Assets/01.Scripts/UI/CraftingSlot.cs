@@ -15,13 +15,8 @@ public class CraftingSlot : MonoBehaviour
     private readonly Color unlockedColor = Color.white;
 
     private void OnEnable()
-    {
-        // 패널이 켜질때 해금 상태를 실시간으로 체크해서 갱신
-        if (itemData == null) return;
-        bool result = UnlockManager.Instance.CheckUnlock(itemData);
-
-        if (result == true) UnlockSlot();
-        else LockSlot();
+    { 
+        CheckUnlockStatus();
     }
 
     private void Awake()
@@ -30,6 +25,26 @@ public class CraftingSlot : MonoBehaviour
         if(Icon == null) Icon = GetComponent<Image>();
         if(button == null) button = GetComponent<Button>();
         Init();
+    }
+
+    public void Setup(ItemDataSO data, SmithingUI ui)
+    {
+        itemData = data;
+        smithingUI = ui;
+        Icon.sprite = data.icon;
+
+        CheckUnlockStatus();
+    }
+
+    // 패널이 켜질때 해금 상태를 실시간으로 체크해서 갱신
+    void CheckUnlockStatus()
+    {
+        if (itemData == null) return;
+        bool result = UnlockManager.Instance.CheckUnlock(itemData);
+
+        if (result == true) UnlockSlot();
+        else LockSlot();
+
     }
 
     // 버튼 이벤트 초기 설정

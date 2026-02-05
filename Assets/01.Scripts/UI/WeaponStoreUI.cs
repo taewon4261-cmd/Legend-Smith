@@ -19,11 +19,17 @@ public class WeaponStoreUI : MonoBehaviour
     [Header("UI")]
     public Image icon;
     public TextMeshProUGUI nameText;
-    public TextMeshProUGUI costText;
+    public TextMeshProUGUI unlockPriceText;
 
     private void Start()
     {
+        CreateWeaponStoreSlots();
 
+        SelectedSlot(weaponDBSO.allWeapon[0]); // 들어가면 첫번째 무기 선택
+    }
+
+    void CreateWeaponStoreSlots()
+    {
         //DB에 등록된 모든 무기를 순회하며 상점 슬롯 생성
         foreach (var weapon in weaponDBSO.allWeapon)
         {
@@ -43,7 +49,7 @@ public class WeaponStoreUI : MonoBehaviour
         if(item.icon != null) icon.sprite = item.icon;
         icon.sprite = item.icon;
         nameText.text = item.itemName;
-        costText.text = $"{item.cost} G";
+        unlockPriceText.text = $"{item.unlockedPrice} G";
 
         UpdateButtenState();
     }
