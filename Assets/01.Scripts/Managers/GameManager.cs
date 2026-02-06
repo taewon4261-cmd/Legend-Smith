@@ -5,10 +5,12 @@ public class GameManager : MonoBehaviour
     [Header("버튼 클릭 시 켜질 패널")]
     public GameObject smithingPanel;
     public GameObject storePanel;
+    public GameObject upgradePanel;
 
     [Header("메인화면 버튼")]
     public GameObject smithingPanelOnBtn;
     public GameObject storePanelBtn;
+    public GameObject upgradePanelBtn;
 
     private void Awake()
     {
@@ -33,20 +35,31 @@ public class GameManager : MonoBehaviour
         }
         MainPanelOff();
     }
+    public void ShowUpgradePanel()
+    {
+        if (upgradePanel != null)
+        {
+            upgradePanel.gameObject.SetActive(true);
+        }
+        MainPanelOff();
+    }
 
     void MainPanelOff()
     {
         smithingPanelOnBtn.SetActive(false);
         storePanelBtn.SetActive(false);
+        upgradePanelBtn.SetActive(false);
     }
 
     public void GoMain()
     {
         if (smithingPanel != null) smithingPanel.SetActive(false);
         if (storePanel != null) storePanel.SetActive(false);
+        if(upgradePanel != null) upgradePanel.SetActive(false);
 
         smithingPanelOnBtn.SetActive(true);
         storePanelBtn.SetActive(true);
+        upgradePanelBtn.SetActive(true);
     }
 
     // 시작시 서브 패널들 비활성화
@@ -54,5 +67,6 @@ public class GameManager : MonoBehaviour
     {
         if (smithingPanel != null) smithingPanel.SetActive(false);
         if (storePanel != null) storePanel.SetActive(false);
+        if(upgradePanel != null) upgradePanel.SetActive(false);
     }
 }

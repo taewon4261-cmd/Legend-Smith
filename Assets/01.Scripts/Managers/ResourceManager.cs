@@ -9,7 +9,7 @@ public class ResourceManager : MonoBehaviour
 
     [Header ("자원")]
     public int currentOre = 0;
-    public int orePerSecond = 1;
+    public int baseOrePerSecond = 1;
     public int gold;
     public int diamond;
 
@@ -45,7 +45,11 @@ public class ResourceManager : MonoBehaviour
         while (true)
         {
             await UniTask.Delay(1000, cancellationToken: this.GetCancellationTokenOnDestroy());
-            currentOre += orePerSecond;
+
+            int bonus = (int)UpgradeManager.Instance.GetTotalBonusValue(UpgradeType.MiningAmount);
+            int finalAmount = baseOrePerSecond + bonus;
+
+            currentOre += finalAmount;
 
             //생산될때마다 업데이트
             UpdateOreUI();
@@ -79,7 +83,7 @@ public class ResourceManager : MonoBehaviour
     /// <summary>
     /// 무기 제작 전 재화 확인 후 시도할때 사용하는 함수
     /// </summary>
-    /// <param name="amount"></param>
+    /// <param name="amount"> 광석 재료 비용</param>
     /// <returns></returns>
     public bool TrySpendOre(int amount)
     {
@@ -92,11 +96,28 @@ public class ResourceManager : MonoBehaviour
             return true;
         }
         return false;
-
     }
 
     /// <summary>
-    ///  아이템 판매시 골드 얻는 함수 (무기 해금, 상점 업그레이드에서 사용)
+    /// 업그레이드 전 골드 확인 후 시도할때 사용하는 함수
+    /// </summary>
+    /// <param name="amount"> 업그레이드 가격 </param>
+    /// <returns></returns>
+    public bool TrySpendGold(int amount)
+    {
+        if (gold >= amount)
+        {
+            gold -= amount;
+
+            UpdateGoldUI();
+
+            return true;
+        }
+        return false;
+    }
+
+    /// <summary>
+    ///  아이템 판매시 골드 얻는 함수
     /// </summary>
     /// <param name="amount"></param>
     public void AddGold(int amount)
