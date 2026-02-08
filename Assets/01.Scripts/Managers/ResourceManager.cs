@@ -150,9 +150,9 @@ public class ResourceManager : MonoBehaviour
 
     void LoadResource()
     {
-       currentOre = PlayerPrefs.GetInt(OreKey, 200);
-       gold = PlayerPrefs.GetInt(GoldKey, 500);
-       diamond =  PlayerPrefs.GetInt(DiaKey, 0);
+       currentOre = PlayerPrefs.GetInt(OreKey, 10000);
+       gold = PlayerPrefs.GetInt(GoldKey,10000);
+       diamond =  PlayerPrefs.GetInt(DiaKey, 10000);
     }
 
     void SaveAllData()

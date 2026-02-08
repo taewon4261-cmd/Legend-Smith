@@ -120,8 +120,11 @@ public class InventoryManager : MonoBehaviour
     public void SellItem(InventorySlot slot, InventoryItem item)
     {
         // 판매금액 매니저에 반영
-        int price = item.GetSellPrice();
-        ResourceManager.Instance.AddGold(price);
+        float bonusRate = UpgradeManager.Instance.GetTotalBonusValue(UpgradeType.SellPrice);
+        int OriginalPrice = item.GetSellPrice();
+        int finalPrice = Mathf.RoundToInt(OriginalPrice * (1 + bonusRate));
+
+        ResourceManager.Instance.AddGold(finalPrice);
 
         // 데이터 및 UI 제거
         myInven.Remove(item);

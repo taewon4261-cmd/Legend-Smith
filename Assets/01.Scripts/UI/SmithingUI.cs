@@ -179,12 +179,14 @@ public class SmithingUI : MonoBehaviour
 
     void AddToInventory()
     {
-        int bonusLuck = currentCombo * 1; // ÄÞº¸´ç È®·ü 1¾¿ Áõ°¡
+        float bonusValue = UpgradeManager.Instance.GetTotalBonusValue(UpgradeType.ComboBonus);
+        int bonusLuck = currentCombo + (int)bonusValue; // ÄÞº¸´ç È®·ü 1¾¿ Áõ°¡
 
         ItemRarity finalRarity = rateData.GetRandomRarity(bonusLuck);
 
         InventoryManager.Instance.AddItem(currentItem, finalRarity);
 
+        Debug.Log($"currentCombo : {currentCombo} \n bonusValue : {bonusValue}");
         isPlaying = false;
 
         currentCombo = 0;

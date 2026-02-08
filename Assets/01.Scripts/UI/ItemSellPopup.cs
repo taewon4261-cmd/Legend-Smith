@@ -23,7 +23,10 @@ public class ItemSellPopup : MonoBehaviour
     /// <param name="item"> 판매 대상 아이템 정보 </param>
     public void OpenPopup(InventorySlot slot, InventoryItem item)
     {
-        // 아이템 데이터 보관
+        int currentPrice = item.GetSellPrice();
+        float bonusPrice = UpgradeManager.Instance.GetTotalBonusValue(UpgradeType.SellPrice);
+        int finalPrice = Mathf.RoundToInt(currentPrice * (1 + bonusPrice));
+
         savedSlot = slot;
         savedItem = item;
 
@@ -31,7 +34,7 @@ public class ItemSellPopup : MonoBehaviour
         Icon.sprite = item.data.icon;
         nameText.text = item.data.itemName;
         rarityText.text = $"{item.rarity}";
-        priceText.text = $"{item.GetSellPrice()}"; // RoundToInt로 반올림 된 가격 적용
+        priceText.text = $"{finalPrice} G"; 
 
         itemSellPopup.SetActive(true);
     }
