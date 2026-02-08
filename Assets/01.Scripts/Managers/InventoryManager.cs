@@ -126,6 +126,8 @@ public class InventoryManager : MonoBehaviour
 
         ResourceManager.Instance.AddGold(finalPrice);
 
+        QuestManager.Instance.NotifyQuestAction(QuestType.Sell, 1);
+
         // 데이터 및 UI 제거
         myInven.Remove(item);
         Destroy(slot.gameObject);

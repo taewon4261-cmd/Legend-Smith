@@ -6,11 +6,14 @@ public class GameManager : MonoBehaviour
     public GameObject smithingPanel;
     public GameObject storePanel;
     public GameObject upgradePanel;
+    public GameObject upQuestPanel;
+    
 
     [Header("메인화면 버튼")]
     public GameObject smithingPanelOnBtn;
     public GameObject storePanelBtn;
     public GameObject upgradePanelBtn;
+    public GameObject upQuestPanelBtn;
 
     private void Awake()
     {
@@ -43,12 +46,21 @@ public class GameManager : MonoBehaviour
         }
         MainPanelOff();
     }
+    public void ShowQuestPanel()
+    {
+        if (upQuestPanel != null)
+        {
+            upQuestPanel.gameObject.SetActive(true);
+        }
+        MainPanelOff();
+    }
 
     void MainPanelOff()
     {
         smithingPanelOnBtn.SetActive(false);
         storePanelBtn.SetActive(false);
         upgradePanelBtn.SetActive(false);
+        upQuestPanelBtn.SetActive(false);
     }
 
     public void GoMain()
@@ -56,10 +68,12 @@ public class GameManager : MonoBehaviour
         if (smithingPanel != null) smithingPanel.SetActive(false);
         if (storePanel != null) storePanel.SetActive(false);
         if(upgradePanel != null) upgradePanel.SetActive(false);
+        if(upQuestPanel != null) upQuestPanel.SetActive(false);
 
         smithingPanelOnBtn.SetActive(true);
         storePanelBtn.SetActive(true);
         upgradePanelBtn.SetActive(true);
+        upQuestPanelBtn.SetActive(true);
     }
 
     // 시작시 서브 패널들 비활성화
@@ -68,5 +82,6 @@ public class GameManager : MonoBehaviour
         if (smithingPanel != null) smithingPanel.SetActive(false);
         if (storePanel != null) storePanel.SetActive(false);
         if(upgradePanel != null) upgradePanel.SetActive(false);
+        if(upQuestPanel != null) upQuestPanel.SetActive(false);
     }
 }

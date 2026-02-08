@@ -126,6 +126,12 @@ public class ResourceManager : MonoBehaviour
         UpdateGoldUI();
     }
 
+    public void AddDia(int amount)
+    {
+        diamond += amount;
+        UpdateDiaUI();
+    }
+
 
     // 초기화 함수들
     void UpdateAllUI()

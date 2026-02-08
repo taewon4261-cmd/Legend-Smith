@@ -186,7 +186,8 @@ public class SmithingUI : MonoBehaviour
 
         InventoryManager.Instance.AddItem(currentItem, finalRarity);
 
-        Debug.Log($"currentCombo : {currentCombo} \n bonusValue : {bonusValue}");
+        QuestManager.Instance.NotifyQuestAction(QuestType.Smithing, 1);
+
         isPlaying = false;
 
         currentCombo = 0;
