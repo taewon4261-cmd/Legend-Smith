@@ -66,6 +66,8 @@ public class UpgradeManager : MonoBehaviour
         {
             ResourceManager.Instance.TrySpendGold(cost);
 
+            SFXManager.Instance.PlaySFX("BuySellUpgrade", 1);
+
             currentLevel++;
             upgradeLevels[data.upgradeName] = currentLevel;
 
@@ -74,6 +76,8 @@ public class UpgradeManager : MonoBehaviour
 
             return true;
         }
+
+        SFXManager.Instance.PlaySFX("OnClickBtnFail", 1);
 
         return false;
     }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class QuestSlotUI : MonoBehaviour
@@ -41,7 +42,7 @@ public class QuestSlotUI : MonoBehaviour
 
         titleText.text = myQuestData.questName;
         progressText.text = $"{myQuestData.currentAmount} / {myQuestData.goalAmount}";
-        rewardText.text = $"보상: {myQuestData.rewardDia} G";
+        rewardText.text = $"보상: {myQuestData.rewardDia} Dia";
 
         if (myQuestData.isClaimed)
         {

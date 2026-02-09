@@ -90,10 +90,12 @@ public class WeaponStoreUI : MonoBehaviour
             UnlockManager.Instance.PurchaseWeapon(currentTarget);
 
             UpdateButtenState();
+
+            SFXManager.Instance.PlaySFX("BuySellUpgrade", 1);
         }
         else
         {
-            // TOOD :  돈 부족 팝업 출력 하거나 안하거나
+            SFXManager.Instance.PlaySFX("OnClickBtnFail", 1);
         }
     }
 }

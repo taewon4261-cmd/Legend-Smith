@@ -77,6 +77,9 @@ public class SmithingUI : MonoBehaviour
     // 핵심 코드
     public void CheckHit()
     {
+
+        SFXManager.Instance.PlaySFX("Smithing",2f);
+
         if (!isPlaying) return;
 
         float currentVal = timingSlider.value; ;
@@ -106,6 +109,8 @@ public class SmithingUI : MonoBehaviour
 
             AddToInventory();
             SetDifficulty();
+
+            SFXManager.Instance.PlaySFX("HitFail",1);
         }
     }
     void CreateWeaponSlots()
@@ -148,16 +153,29 @@ public class SmithingUI : MonoBehaviour
     public void OnButtonKeep() 
     {
         choicePopup.SetActive(false);
+        SFXManager.Instance.PlaySFX("HitSuccess",1);
         AddToInventory();
     }
 
     // 핸들 움직이기 시작 버튼
     public void OnClickGameStart()
     {
-        if (isPlaying) return;
+        if (isPlaying)
+        {
+            SFXManager.Instance.PlaySFX("OnClickBtnFail", 1);
+            return;
+        }
+
+        if (currentItem == null)
+        {
+            SFXManager.Instance.PlaySFX("OnClickBtnFail", 1);
+            return;
+        }
+
 
         if (InventoryManager.Instance.myInven.Count >= 15)
         {
+            SFXManager.Instance.PlaySFX("OnClickBtnFail", 1);
             return;
         }
 
@@ -173,7 +191,7 @@ public class SmithingUI : MonoBehaviour
         }
         else
         {
-            // TODO : 실패 연출 넣기? 깜빡임 or 텍스트? 진동?
+           SFXManager.Instance.PlaySFX("OnClickBtnFail", 1);
         }
     }
 

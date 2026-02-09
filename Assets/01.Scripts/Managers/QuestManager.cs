@@ -78,6 +78,8 @@ public class QuestManager : MonoBehaviour
         {
             quest.isClaimed = true;
             ResourceManager.Instance.AddDia(quest.rewardDia);
+            SFXManager.Instance.PlaySFX("Quest", 1);
+
             SaveQuestProgress();
         }
     }

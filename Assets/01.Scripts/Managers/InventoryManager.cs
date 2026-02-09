@@ -128,6 +128,8 @@ public class InventoryManager : MonoBehaviour
 
         QuestManager.Instance.NotifyQuestAction(QuestType.Sell, 1);
 
+        SFXManager.Instance.PlaySFX("BuySellUpgrade", 1);
+
         // 데이터 및 UI 제거
         myInven.Remove(item);
         Destroy(slot.gameObject);
