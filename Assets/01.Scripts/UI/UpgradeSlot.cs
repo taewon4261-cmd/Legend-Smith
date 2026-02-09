@@ -55,10 +55,6 @@ public class UpgradeSlot : MonoBehaviour
         {
             RefreshUI();
         }
-        else
-        {
-            // 실패 소리 출력
-        }
 
     }
 }

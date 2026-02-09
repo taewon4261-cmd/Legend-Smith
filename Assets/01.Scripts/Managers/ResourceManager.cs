@@ -117,6 +117,24 @@ public class ResourceManager : MonoBehaviour
     }
 
     /// <summary>
+    /// 업그레이드 전 다이아 확인 후 시도할때 사용하는 함수
+    /// </summary>
+    /// <param name="amount"> 다이아상점 구매 가격 </param>
+    /// <returns></returns>
+    public bool TrySpendDia(int amount)
+    {
+        if (diamond >= amount)
+        {
+            diamond -= amount;
+
+            UpdateDiaUI();
+
+            return true;
+        }
+        return false;
+    }
+
+    /// <summary>
     ///  아이템 판매시 골드 얻는 함수
     /// </summary>
     /// <param name="amount"></param>
@@ -131,7 +149,11 @@ public class ResourceManager : MonoBehaviour
         diamond += amount;
         UpdateDiaUI();
     }
-
+    public void AddOre(int amount)
+    {
+        currentOre += amount;
+        UpdateOreUI();
+    }
 
     // 초기화 함수들
     void UpdateAllUI()
