@@ -37,8 +37,6 @@ public class ItemSellPopup : MonoBehaviour
         priceText.text = $"{finalPrice} G"; 
 
         itemSellPopup.SetActive(true);
-
-        Debug.Log("열림");
     }
 
     // 판매 확인 버튼
