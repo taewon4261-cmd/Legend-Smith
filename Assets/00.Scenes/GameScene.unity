@@ -1169,7 +1169,7 @@ GameObject:
   - component: {fileID: 143809803}
   - component: {fileID: 143809802}
   m_Layer: 5
-  m_Name: Button
+  m_Name: LogoutBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1238,7 +1238,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 143809803}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1942228394}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: OnClickExitGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &143809803
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19635,8 +19647,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1942228393}
+  - component: {fileID: 1942228394}
   m_Layer: 0
-  m_Name: ManagerList
+  m_Name: GameManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -19667,6 +19680,18 @@ Transform:
   - {fileID: 22118218}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1942228394
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1942228392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3610d80eedb27fb4b8d79e3b04424efb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1955457410
 GameObject:
   m_ObjectHideFlags: 0
