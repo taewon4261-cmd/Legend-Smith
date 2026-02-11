@@ -13,6 +13,8 @@ public class ResourceManager : MonoBehaviour
     public int gold;
     public int diamond;
 
+    public int totalGoldEarned = 0;
+
     [Header("UI")]
     public TextMeshProUGUI oreText;
     public TextMeshProUGUI goldText;
@@ -141,6 +143,7 @@ public class ResourceManager : MonoBehaviour
     public void AddGold(int amount)
     {
         gold += amount;
+        totalGoldEarned += amount;
         UpdateGoldUI();
     }
 
@@ -178,9 +181,9 @@ public class ResourceManager : MonoBehaviour
 
     void LoadResource()
     {
-       currentOre = PlayerPrefs.GetInt(OreKey, 10000);
-       gold = PlayerPrefs.GetInt(GoldKey,10000);
-       diamond =  PlayerPrefs.GetInt(DiaKey, 10000);
+       currentOre = PlayerPrefs.GetInt(OreKey, 500);
+       gold = PlayerPrefs.GetInt(GoldKey, 500);
+       diamond =  PlayerPrefs.GetInt(DiaKey, 0);
     }
 
     void SaveAllData()
@@ -188,6 +191,8 @@ public class ResourceManager : MonoBehaviour
         PlayerPrefs.SetInt(OreKey, currentOre);
         PlayerPrefs.SetInt(GoldKey, gold);
         PlayerPrefs.SetInt(DiaKey, diamond);
+
+        LootLockerManager.Instance.SubmitScore("rank_gold", gold);
 
         PlayerPrefs.Save();
     }

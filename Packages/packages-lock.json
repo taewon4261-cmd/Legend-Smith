@@ -1,5 +1,11 @@
 {
   "dependencies": {
+    "com.lootlocker.lootlockersdk": {
+      "version": "file:C:/Users/taewo/Downloads/unity-sdk-7.0.0/unity-sdk-7.0.0",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {}
+    },
     "com.unity.2d.sprite": {
       "version": "1.0.0",
       "depth": 0,

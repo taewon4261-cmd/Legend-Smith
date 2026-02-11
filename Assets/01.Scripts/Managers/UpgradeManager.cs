@@ -74,12 +74,30 @@ public class UpgradeManager : MonoBehaviour
             PlayerPrefs.SetInt(UpgradeKey + data.upgradeName, currentLevel);
             PlayerPrefs.Save();
 
+            int totalLevel = 0;
+            foreach (var level in upgradeLevels.Values)
+            {
+                totalLevel += level;
+            }
+            LootLockerManager.Instance.SubmitScore("rank_upgrade_total", totalLevel);
+
             return true;
         }
 
         SFXManager.Instance.PlaySFX("OnClickBtnFail", 1);
 
         return false;
+    }
+
+    // 전체 강화 레벨 합계를 반환하는 함수
+    public int GetAllTotalLevel()
+    {
+        int total = 0;
+        foreach (var data in allUpgradeData)
+        {
+            total += GetLevel(data);
+        }
+        return total;
     }
 }
 
