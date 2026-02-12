@@ -15,6 +15,7 @@ public class PanelManager : MonoBehaviour
     public GameObject weaponStorePanelBtn;
     public GameObject storePanelBtn;
     public GameObject upQuestPanelBtn;
+    public GameObject settingsPanelBtn;
 
     [Header("상점 내부 버튼")]
     public GameObject upgradePanel;
@@ -69,6 +70,7 @@ public class PanelManager : MonoBehaviour
         {
             settingsPanel.gameObject.SetActive(true);
         }
+        MainPanelOff();
     }
 
     public void ShowRankPanel()
@@ -85,6 +87,7 @@ public class PanelManager : MonoBehaviour
         weaponStorePanelBtn.SetActive(false);
         storePanelBtn.SetActive(false);
         upQuestPanelBtn.SetActive(false);
+        settingsPanelBtn.SetActive(false);
     }
 
     public void GoMain()
@@ -100,6 +103,7 @@ public class PanelManager : MonoBehaviour
         weaponStorePanelBtn.SetActive(true);
         storePanelBtn.SetActive(true);
         upQuestPanelBtn.SetActive(true);
+        settingsPanelBtn.SetActive(true);
     }
 
     // 시작시 서브 패널들 비활성화

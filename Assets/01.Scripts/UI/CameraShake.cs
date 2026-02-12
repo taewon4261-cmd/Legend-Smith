@@ -16,6 +16,12 @@ public class CameraShake : MonoBehaviour
 
     public void TriggerShake()
     {
+
+        if (VibrationManager.Instance != null && !VibrationManager.Instance.isVibrationOn)
+        {
+            return;
+        }
+
         StopAllCoroutines(); // 움직이고있다면 멈춤
         StartCoroutine(Shake());
 

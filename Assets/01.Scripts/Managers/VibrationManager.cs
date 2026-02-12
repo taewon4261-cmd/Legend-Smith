@@ -6,7 +6,7 @@ public class VibrationManager : MonoBehaviour
     public static VibrationManager Instance;
 
     public Toggle vibrateToggle;
-    private bool isVibrationOn = true;
+    public bool isVibrationOn = true;
 
     private void Awake()
     {

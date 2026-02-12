@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41290f2263d9dfb4cb85079f4c377c48, type: 3}
   m_Name: ComboBonusUpgrade
   m_EditorClassIdentifier: 
-  upgradeName: "\uCF64\uBCF4 \uC131\uACF5\uC2DC \uD655\uB960 \uC99D\uAC00"
+  upgradeName: "\uC81C\uC791 \uD655\uB960 \uC99D\uAC00"
   Icon: {fileID: 21300000, guid: 9ce703a48afdab9459f59f58bf746594, type: 3}
   type: 2
   valuePerLevel: 1

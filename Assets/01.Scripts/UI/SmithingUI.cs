@@ -77,9 +77,15 @@ public class SmithingUI : MonoBehaviour
     public void CheckHit()
     {
 
+        if (!isPlaying)
+        {
+            SFXManager.Instance.PlaySFX("OnClickBtnFail", 2f);
+            return;
+        }
+
         SFXManager.Instance.PlaySFX("Smithing",2f);
 
-        if (!isPlaying) return;
+        if (VibrationManager.Instance != null) VibrationManager.Instance.Vibrate();
 
         float currentVal = timingSlider.value; ;
 
@@ -251,7 +257,7 @@ public class SmithingUI : MonoBehaviour
 
         if (WeaponCost != null)
         {
-            WeaponCost.text = $"{newItem.cost} Ore";
+            WeaponCost.text = $"{newItem.cost} 광석";
             WeaponCost.gameObject.SetActive(true); // 다시 켜기!
         }
     }

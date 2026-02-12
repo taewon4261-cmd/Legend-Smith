@@ -15,6 +15,6 @@ MonoBehaviour:
   upgradeName: "\uD310\uB9E4 \uAC00\uACA9 \uC99D\uAC00"
   Icon: {fileID: 21300000, guid: f26228c6f8fb2e543ac6950170d73793, type: 3}
   type: 1
-  valuePerLevel: 0.05
-  baseUpgradeCost: 300
-  costMultiplier: 1.2
+  valuePerLevel: 0.1
+  baseUpgradeCost: 500
+  costMultiplier: 1.5

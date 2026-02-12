@@ -74,11 +74,8 @@ public class UpgradeManager : MonoBehaviour
             PlayerPrefs.SetInt(UpgradeKey + data.upgradeName, currentLevel);
             PlayerPrefs.Save();
 
-            int totalLevel = 0;
-            foreach (var level in upgradeLevels.Values)
-            {
-                totalLevel += level;
-            }
+            int totalLevel = GetAllTotalLevel();
+
             LootLockerManager.Instance.SubmitScore("rank_upgrade_total", totalLevel);
 
             return true;

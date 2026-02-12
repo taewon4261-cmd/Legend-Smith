@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 [CreateAssetMenu(fileName = "DiaStore", menuName = "Game/DiaStoreData")]
 public class DiaStoreDataSO : ScriptableObject

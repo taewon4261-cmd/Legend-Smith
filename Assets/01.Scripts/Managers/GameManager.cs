@@ -8,8 +8,23 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance == null) Instance = this;
-        else Destroy(gameObject);
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Application.targetFrameRate = 60;
+
+        if (!Application.isEditor)
+        {
+            Debug.unityLogger.filterLogType = LogType.Error;
+        }
     }
 
     public void OnClickExitGame()

@@ -42,7 +42,7 @@ public class QuestSlotUI : MonoBehaviour
 
         titleText.text = myQuestData.questName;
         progressText.text = $"{myQuestData.currentAmount} / {myQuestData.goalAmount}";
-        rewardText.text = $"보상: {myQuestData.rewardDia} Dia";
+        rewardText.text = $"보상: {myQuestData.rewardDia} 다이아";
 
         if (myQuestData.isClaimed)
         {

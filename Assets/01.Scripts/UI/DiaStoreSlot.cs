@@ -30,7 +30,7 @@ public class DiaStoreSlot : MonoBehaviour
         icon.sprite = data.icon;
         nameText.text = data.rewardName;
         rewardText.text = $"{data.reward}";
-        priceText.text = $"{data.price} Dia";
+        priceText.text = $"{data.price} ¥Ÿ¿Ãæ∆";
 
         string unit = "";
         switch (data.type)

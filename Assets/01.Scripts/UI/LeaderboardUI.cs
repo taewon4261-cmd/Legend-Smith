@@ -9,10 +9,7 @@ public class LeaderboardUI : MonoBehaviour
     public GameObject rankSlotPrefab; 
     public Transform contentParent;
 
-    [Header("탭 버튼 색상용 (선택사항)")]
-    public Button[] tabButtons;
-
-    // 랭킹 불러오기 (버튼에 연결할 함수)
+    //랭킹 불러오기 버튼
     public void OnClickTab(string leaderboardKey)
     {
         if (rankSlotPrefab == null || contentParent == null) return;
@@ -23,7 +20,6 @@ public class LeaderboardUI : MonoBehaviour
         {
             if (response.success)
             {
-                // Debug.Log(" 데이터 도착!"); // 이건 놔둬도 됨
                 LootLockerLeaderboardMember[] members = response.items;
 
                 if (members == null) return;
@@ -37,7 +33,6 @@ public class LeaderboardUI : MonoBehaviour
 
                     if (slotScript != null)
                     {
-                        //  [최종 로직] 1.메타데이터 -> 2.플레이어이름 -> 3.ID 순서
                         string pName = members[i].metadata;
 
                         if (string.IsNullOrEmpty(pName) && members[i].player != null)
@@ -50,14 +45,9 @@ public class LeaderboardUI : MonoBehaviour
                             pName = members[i].member_id;
                         }
 
-                        // UI 적용
                         slotScript.SetUI(members[i].rank, pName, members[i].score);
                     }
                 }
-            }
-            else
-            {
-                Debug.LogError("로드 실패: " + response.errorData.message);
             }
         });
     }
