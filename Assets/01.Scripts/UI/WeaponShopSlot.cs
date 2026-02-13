@@ -20,7 +20,7 @@ public class WeaponShopSlot : MonoBehaviour
 
         SetTransparency(0.5f); // 초기 상태 (반투명 처리)
 
-        bool isUnlocked = UnlockManager.Instance.CheckUnlock(data);
+        bool isUnlocked = GameManager.Instance.Unlock.CheckUnlock(data);
     }
 
     // 이미지의 투명도 조절

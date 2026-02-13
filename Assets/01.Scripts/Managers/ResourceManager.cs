@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class ResourceManager : MonoBehaviour
 {
-    public static ResourceManager Instance;
-
-
     [Header ("자원")]
     public int currentOre = 0;
     public int baseOrePerSecond = 1;
@@ -23,14 +20,7 @@ public class ResourceManager : MonoBehaviour
     private const string OreKey = "Ore_";
     private const string GoldKey = "Gold_";
     private const string DiaKey = "Dia_";
-
-    private void Awake()
-    {
-        if (Instance == null) Instance = this;
-        else Destroy(gameObject);
-    }
-
-    private void Start()
+    public void Init()
     {
         LoadResource();
         // UI 초기화, 게임 시작시 재화수급 시작
@@ -48,7 +38,7 @@ public class ResourceManager : MonoBehaviour
         {
             await UniTask.Delay(1000, cancellationToken: this.GetCancellationTokenOnDestroy());
 
-            int bonus = (int)UpgradeManager.Instance.GetTotalBonusValue(UpgradeType.MiningAmount);
+            int bonus = (int)GameManager.Instance.Upgrade.GetTotalBonusValue(UpgradeType.MiningAmount);
             int finalAmount = baseOrePerSecond + bonus;
 
             currentOre += finalAmount;
@@ -192,7 +182,7 @@ public class ResourceManager : MonoBehaviour
         PlayerPrefs.SetInt(GoldKey, gold);
         PlayerPrefs.SetInt(DiaKey, diamond);
 
-        LootLockerManager.Instance.SubmitScore("rank_gold", gold);
+        GameManager.Instance.LootLocker.SubmitScore("rank_gold", gold);
 
         PlayerPrefs.Save();
     }

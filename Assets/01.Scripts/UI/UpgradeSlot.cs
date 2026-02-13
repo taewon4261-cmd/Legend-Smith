@@ -34,9 +34,9 @@ public class UpgradeSlot : MonoBehaviour
 
     void RefreshUI()
     {
-        int level = UpgradeManager.Instance.GetLevel(data);
-        int cost = UpgradeManager.Instance.GetCurrentCost(data);
-        float curruentEffect = UpgradeManager.Instance.GetTotalEffect(data);
+        int level = GameManager.Instance.Upgrade.GetLevel(data);
+        int cost = GameManager.Instance.Upgrade.GetCurrentCost(data);
+        float curruentEffect = GameManager.Instance.Upgrade.GetTotalEffect(data);
         float nextEffect = (level + 1) * data.valuePerLevel;
 
         nameText.text = data.upgradeName;
@@ -50,7 +50,7 @@ public class UpgradeSlot : MonoBehaviour
 
     void OnClickBuy()
     {
-        bool isSuccess = UpgradeManager.Instance.TryUpgrade(data);
+        bool isSuccess = GameManager.Instance.Upgrade.TryUpgrade(data);
         if (isSuccess)
         {
             RefreshUI();

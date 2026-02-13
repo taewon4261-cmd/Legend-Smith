@@ -18,6 +18,11 @@ public class AppManager : MonoBehaviour
             }
         }
     }
+
+    public void Init()
+    {
+        if(quitPopup != null) quitPopup.gameObject.SetActive(false);
+    }
     public void OnClickYesQuit()
     {
         Application.Quit(); 

@@ -14,7 +14,7 @@ public class NameChanger : MonoBehaviour
 
         if (inputName.Length > 0)
         {
-            LootLockerManager.Instance.SetPlayerName(inputName);
+            GameManager.Instance.LootLocker.SetPlayerName(inputName);
             PlayerPrefs.SetString("PlayerName", inputName);
             PlayerPrefs.Save();
 
@@ -27,16 +27,16 @@ public class NameChanger : MonoBehaviour
     void SubmitAllScores()
     {
         //  °ñµå ·©Å· 
-        int currentGold = ResourceManager.Instance.totalGoldEarned;
-        LootLockerManager.Instance.SubmitScore("rank_gold", currentGold);
+        int currentGold = GameManager.Instance.Resource.totalGoldEarned;
+        GameManager.Instance.LootLocker.SubmitScore("rank_gold", currentGold);
 
         //  ¹«±â ·©Å·
-        int weaponScore = UnlockManager.Instance.GetHighestWeaponCost();
-        LootLockerManager.Instance.SubmitScore("rank_weapon_tier", weaponScore);
+        int weaponScore = GameManager.Instance.Unlock.GetHighestWeaponCost();
+        GameManager.Instance.LootLocker.SubmitScore("rank_weapon_tier", weaponScore);
 
         //  °­È­ ·©Å·
-        int upgradeScore = UpgradeManager.Instance.GetAllTotalLevel();
-        LootLockerManager.Instance.SubmitScore("rank_upgrade_total", upgradeScore);
+        int upgradeScore = GameManager.Instance.Upgrade.GetAllTotalLevel();
+        GameManager.Instance.LootLocker.SubmitScore("rank_upgrade_total", upgradeScore);
     }
 
     IEnumerator RefreshRankingCoroutine()

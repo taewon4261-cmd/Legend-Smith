@@ -30,7 +30,7 @@ public class InventorySlot : MonoBehaviour
     // 판매 버튼 클릭시 판매 확인창 호출
     public void OnClickSellButton()
     {
-        InventoryManager.Instance.ShowSellPopup(this, itemInfo);
+        GameManager.Instance.Inven.ShowSellPopup(this, itemInfo);
     }
 
 }

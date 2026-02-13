@@ -3,27 +3,10 @@ using LootLocker.Requests; // 이게 있어야 작동함
 
 public class LootLockerManager : MonoBehaviour
 {
-    public static LootLockerManager Instance;
-
     private string currentPlayerID = "";
 
-    void Awake()
+    public void Init()
     {
-        // 싱글톤 패턴 (게임 내내 살아있게 함)
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
-
-    void Start()
-    {
-        // 게임 시작하자마자 로그인 시도!
         StartGuestSession();
     }
 

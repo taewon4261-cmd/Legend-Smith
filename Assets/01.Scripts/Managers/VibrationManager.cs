@@ -3,17 +3,9 @@ using UnityEngine.UI;
 
 public class VibrationManager : MonoBehaviour
 {
-    public static VibrationManager Instance;
-
     public Toggle vibrateToggle;
     public bool isVibrationOn = true;
-
-    private void Awake()
-    {
-        if (Instance == null) Instance = this;
-    }
-
-    private void Start()
+    public void Init()
     {
         int savedVal = PlayerPrefs.GetInt("VibrateOn", 1);
         isVibrationOn = (savedVal == 1);

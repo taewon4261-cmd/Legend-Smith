@@ -59,7 +59,7 @@ public class WeaponStoreUI : MonoBehaviour
         if (currentTarget == null) return;
 
         // PlayerPrefs에 저장된 해금 데이터 확인
-        bool isUnlocked = UnlockManager.Instance.CheckUnlock(currentTarget);
+        bool isUnlocked = GameManager.Instance.Unlock.CheckUnlock(currentTarget);
 
         if (isUnlocked)
         {
@@ -79,23 +79,23 @@ public class WeaponStoreUI : MonoBehaviour
         if (currentTarget == null) return;
 
         // 중복 구매 방지
-        if (UnlockManager.Instance.CheckUnlock(currentTarget)) return;
+        if (GameManager.Instance.Unlock.CheckUnlock(currentTarget)) return;
 
         //재화 확인 및 차감
-        if (ResourceManager.Instance.gold >= currentTarget.unlockedPrice)
+        if (GameManager.Instance.Resource.gold >= currentTarget.unlockedPrice)
         {
-            ResourceManager.Instance.TrySpendGold(currentTarget.unlockedPrice);
+            GameManager.Instance.Resource.TrySpendGold(currentTarget.unlockedPrice);
 
             // PlayerPrefs에 저장 및 즉시 반영
-            UnlockManager.Instance.PurchaseWeapon(currentTarget);
+            GameManager.Instance.Unlock.PurchaseWeapon(currentTarget);
 
             UpdateButtenState();
 
-            SFXManager.Instance.PlaySFX("BuySellUpgrade", 1);
+            GameManager.Instance.SFX.PlaySFX("BuySellUpgrade", 1);
         }
         else
         {
-            SFXManager.Instance.PlaySFX("OnClickBtnFail", 1);
+            GameManager.Instance.SFX.PlaySFX("OnClickBtnFail", 1);
         }
     }
 }

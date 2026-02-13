@@ -5,19 +5,28 @@ using UnityEngine;
 public class CameraShake : MonoBehaviour
 {
     public float shakeDuration = 0.5f;
-    public float shakeMagnitude = 0.1f;
+    public float shakeMagnitude = 50f;
 
-    Vector3 initialPosition;
+    private RectTransform rectTransform; 
+    private Vector2 initialPosition;
 
+
+    private void Awake()
+    {
+        rectTransform = GetComponent<RectTransform>();
+    }
     private void OnEnable()
     {
-        initialPosition = transform.localPosition;
+        if (rectTransform != null)
+        {
+            initialPosition = rectTransform.anchoredPosition;
+        }
     }
 
     public void TriggerShake()
     {
 
-        if (VibrationManager.Instance != null && !VibrationManager.Instance.isVibrationOn)
+        if (GameManager.Instance != null && !GameManager.Instance.Vibration.isVibrationOn)
         {
             return;
         }
@@ -25,9 +34,9 @@ public class CameraShake : MonoBehaviour
         StopAllCoroutines(); // øÚ¡˜¿Ã∞Ì¿÷¥Ÿ∏È ∏ÿ√„
         StartCoroutine(Shake());
 
-        if (VibrationManager.Instance != null)
+        if (GameManager.Instance != null)
         {
-            VibrationManager.Instance.Vibrate();
+            GameManager.Instance.Vibration.Vibrate();
         }
     }
 
@@ -37,12 +46,13 @@ public class CameraShake : MonoBehaviour
 
         while (elapsed < shakeDuration)
         {
-            transform.localPosition = initialPosition + Random.insideUnitSphere * shakeMagnitude;
+            Vector2 randomPoint = Random.insideUnitCircle * shakeMagnitude;
+            rectTransform.anchoredPosition = initialPosition + randomPoint;
 
             elapsed += Time.deltaTime;
             yield return null;
         }
 
-        transform.localPosition = initialPosition;
+        rectTransform.anchoredPosition = initialPosition;
     }
 }

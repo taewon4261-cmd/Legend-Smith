@@ -5,17 +5,13 @@ using UnityEngine;
 
 public class QuestManager : MonoBehaviour
 {
-    public static QuestManager Instance;
-
     [Header("퀘스트 목록")]
     public List<QuestData> dailyQuests;
 
     private const string LastLoginKey = "LastLoinData_";
 
-    private void Awake()
+    public void Init()
     {
-        if (Instance == null) Instance = this;
-        else Destroy(gameObject);
         CheckDailyReset();
 
         StartCoroutine(PlayTimeCoroutine());
@@ -77,8 +73,8 @@ public class QuestManager : MonoBehaviour
         if (quest.currentAmount >= quest.goalAmount && !quest.isClaimed)
         {
             quest.isClaimed = true;
-            ResourceManager.Instance.AddDia(quest.rewardDia);
-            SFXManager.Instance.PlaySFX("Quest", 1);
+            GameManager.Instance.Resource.AddDia(quest.rewardDia);
+            GameManager.Instance.SFX.PlaySFX("Quest", 1);
 
             SaveQuestProgress();
         }
@@ -110,9 +106,9 @@ public class QuestManager : MonoBehaviour
             yield return new WaitForSeconds(1f); // 1초 대기
 
             // 1초 지날 때마다 퀘스트 매니저한테 "1초 지남" 신고
-            if (QuestManager.Instance != null)
+            if (GameManager.Instance != null)
             {
-                QuestManager.Instance.NotifyQuestAction(QuestType.PlayTime, 1);
+                GameManager.Instance.Quest.NotifyQuestAction(QuestType.PlayTime, 1);
             }
         }
     }

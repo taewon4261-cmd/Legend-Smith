@@ -15,8 +15,6 @@ public class InventorySaveData
 }
 public class InventoryManager : MonoBehaviour
 {
-    public static InventoryManager Instance;
-
     public WeaponDBSO weaponDB;
 
     [Header("인벤토리 연결")]
@@ -29,15 +27,36 @@ public class InventoryManager : MonoBehaviour
 
     private const string invenWeaponKey = "Inven_";
 
-    private void Awake()
-    {
-        if (Instance == null) Instance = this;
-        else Destroy(gameObject);
-    }
+    private Queue<GameObject> slotPool = new Queue<GameObject>();
 
-    private void Start()
+    public void Init()
     {
         LoadInventory();
+    }
+
+    private GameObject GetSlotFromPool()
+    {
+        GameObject slotObj;
+        if (slotPool.Count > 0)
+        {
+            slotObj = slotPool.Dequeue();
+            slotObj.SetActive(true);
+        }
+        else
+        {
+            slotObj = Instantiate(slotPrefab, contentParent);
+        }
+
+        // 계층 구조상 가장 아래로 보내서 순서 유지
+        slotObj.transform.SetAsLastSibling();
+
+        return slotObj;
+    }
+
+    void ReturnSlotToPool(GameObject slotObj)
+    {
+        slotObj.SetActive(false); // 비활성화
+        slotPool.Enqueue(slotObj); // 풀에 넣기
     }
 
     /// <summary>
@@ -52,7 +71,7 @@ public class InventoryManager : MonoBehaviour
         myInven.Add(item);
 
         // 인벤토리 UI 슬롯 생성 및 데이터 전달
-        GameObject slot = Instantiate(slotPrefab, contentParent);
+        GameObject slot = GetSlotFromPool();
         InventorySlot slotScript = slot.GetComponent<InventorySlot>();
         slotScript.SetSlot(item);
 
@@ -89,9 +108,16 @@ public class InventoryManager : MonoBehaviour
 
         myInven.Clear();
 
-        foreach (Transform child in contentParent)
+        // contentParent.childCount : 유니티 변수 ( 현재 내 자식 오브젝트가 몇 개인지 실시간으로 세어주는 기능)
+        int myChildCount = contentParent.childCount;
+        for (int i = myChildCount - 1; i >= 0; i--)
         {
-            Destroy(child.gameObject);
+            GameObject child = contentParent.GetChild(i).gameObject;
+
+            if (child.activeSelf)
+            {
+                ReturnSlotToPool(child);
+            }
         }
 
         foreach (var info in pack.saveItems)
@@ -103,7 +129,8 @@ public class InventoryManager : MonoBehaviour
                 InventoryItem item = new InventoryItem(originalData, info.rarity);
                 myInven.Add(item);
 
-                GameObject slot = Instantiate(slotPrefab, contentParent);
+                GameObject slot = GetSlotFromPool();
+
                 InventorySlot slotScript = slot.GetComponent<InventorySlot>();
                 slotScript.SetSlot(item);
             }
@@ -120,19 +147,20 @@ public class InventoryManager : MonoBehaviour
     public void SellItem(InventorySlot slot, InventoryItem item)
     {
         // 판매금액 매니저에 반영
-        float bonusRate = UpgradeManager.Instance.GetTotalBonusValue(UpgradeType.SellPrice);
+        float bonusRate = GameManager.Instance.Upgrade.GetTotalBonusValue(UpgradeType.SellPrice);
         int OriginalPrice = item.GetSellPrice();
         int finalPrice = Mathf.RoundToInt(OriginalPrice * (1 + bonusRate));
 
-        ResourceManager.Instance.AddGold(finalPrice);
+        GameManager.Instance.Resource.AddGold(finalPrice);
 
-        QuestManager.Instance.NotifyQuestAction(QuestType.Sell, 1);
+        GameManager.Instance.Quest.NotifyQuestAction(QuestType.Sell, 1);
 
-        SFXManager.Instance.PlaySFX("BuySellUpgrade", 1);
+        GameManager.Instance.SFX.PlaySFX("BuySellUpgrade", 1);
 
         // 데이터 및 UI 제거
         myInven.Remove(item);
-        Destroy(slot.gameObject);
+
+        ReturnSlotToPool(slot.gameObject);
 
         //판매상태저장
         SaveInventory();

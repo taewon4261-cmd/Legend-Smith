@@ -10,11 +10,6 @@ public class SoundManager : MonoBehaviour
     [Header("UI 슬라이더 연결")]
     public Slider masterSlider;
 
-    private void Start()
-    {
-        Init();
-    }
-
     public void Init()
     { 
         float savedVol = PlayerPrefs.GetFloat("MasterVol", 1.0f);

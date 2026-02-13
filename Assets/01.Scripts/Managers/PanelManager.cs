@@ -23,13 +23,6 @@ public class PanelManager : MonoBehaviour
 
     [Header("설정 내부 버튼")]
     public GameObject rankPanel;
-
-    private void Awake()
-    {
-        //모든 서브 패널 비활성화 함수
-        InitPanels();
-    }
-
     public void ShowSmithingPanel()
     {
         if (smithingPanel != null)
@@ -107,7 +100,7 @@ public class PanelManager : MonoBehaviour
     }
 
     // 시작시 서브 패널들 비활성화
-    private void InitPanels()
+    public void InitPanels()
     {
         if (smithingPanel != null) smithingPanel.SetActive(false);
         if (weaponStorePanel != null) weaponStorePanel.SetActive(false);

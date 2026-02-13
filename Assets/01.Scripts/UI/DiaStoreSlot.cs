@@ -49,28 +49,28 @@ public class DiaStoreSlot : MonoBehaviour
 
     public void OnClickBtn()
     {
-        bool isSuccess = ResourceManager.Instance.TrySpendDia(data.price);
+        bool isSuccess = GameManager.Instance.Resource.TrySpendDia(data.price);
 
         if (isSuccess)
         {
             switch (data.type)
             {
                 case DiaStoreType.Gold:
-                    ResourceManager.Instance.AddGold(data.reward);
+                    GameManager.Instance.Resource.AddGold(data.reward);
                     break;
 
                 case DiaStoreType.Ore:
-                    ResourceManager.Instance.AddOre(data.reward);
+                    GameManager.Instance.Resource.AddOre(data.reward);
                     break;
             }
 
             // 성공 사운드
-            SFXManager.Instance.PlaySFX("BuySellUpgrade", 1);
+            GameManager.Instance.SFX.PlaySFX("BuySellUpgrade", 1);
         }
         else
         {
             // 실패 사운드
-            SFXManager.Instance.PlaySFX("OnClickBtnFail", 1);
+            GameManager.Instance.SFX.PlaySFX("OnClickBtnFail", 1);
         }
 
     }

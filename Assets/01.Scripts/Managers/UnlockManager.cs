@@ -3,19 +3,32 @@ using UnityEngine;
 
 public class UnlockManager : MonoBehaviour
 {
-    public static UnlockManager Instance;
-
     public List<ItemDataSO> allWeaponData;
 
     // 저장시 사용할 키
     private const string UnlockKey = "Unlock_";
 
-    private void Awake()
+    private Dictionary<string, bool> unlockCache = new Dictionary<string, bool>();
+
+    public void Init()
     {
-        if(Instance == null)Instance = this;
-        else Destroy(gameObject);
+        unlockCache.Clear();
+
+        foreach (var data in allWeaponData)
+        {
+            bool isUnlocked = data.isDefaultUnlocked;
+
+            if (!isUnlocked)
+            {
+                if (PlayerPrefs.GetInt(UnlockKey + data.itemName, 0) == 1)
+                {
+                    isUnlocked = true;
+                }
+            }
+            unlockCache.Add(data.itemName, isUnlocked);
+        }
     }
-    
+
     /// <summary>
     /// 아이템의 해금 여부 확인
     /// </summary>
@@ -23,11 +36,11 @@ public class UnlockManager : MonoBehaviour
     /// <returns>해금되어 있으면 true, 잠겨있으면 false 반환 </returns>
     public bool CheckUnlock(ItemDataSO data)
     {
-        //기본적으로 해금된 아이템인 경우 즉시 true
-        if(data.isDefaultUnlocked == true) return true;
-
-        // 키값 확인, 1이면 해금 0이면 잠금 판정
-        return PlayerPrefs.GetInt(UnlockKey + data.itemName, 0) == 1;
+        if (unlockCache.TryGetValue(data.itemName, out bool isUnlocked))
+        {
+            return isUnlocked;
+        }
+        return false;
     }
 
     public int GetUnlockCount()
@@ -56,16 +69,33 @@ public class UnlockManager : MonoBehaviour
 
     public void PurchaseWeapon(ItemDataSO data)
     {
+        // 1. 저장소(PlayerPrefs)에 저장 (영구 보관)
         PlayerPrefs.SetInt(UnlockKey + data.itemName, 1);
 
-        int currentMax = PlayerPrefs.GetInt("MaxWeaponCost", 0);
-        if (data.unlockedPrice > currentMax) PlayerPrefs.SetInt("MaxWeaponCost", data.unlockedPrice);
+        // 2. 목록표(Dictionary)도 업데이트! (중요: 이걸 해야 재시작 안 해도 바로 반영됨)
+        if (unlockCache.ContainsKey(data.itemName))
+        {
+            unlockCache[data.itemName] = true;
+        }
+        else
+        {
+            unlockCache.Add(data.itemName, true);
+        }
 
+        // 최대 가격 갱신 로직
+        int currentMax = PlayerPrefs.GetInt("MaxWeaponCost", 0);
+        if (data.unlockedPrice > currentMax)
+        {
+            PlayerPrefs.SetInt("MaxWeaponCost", data.unlockedPrice);
+        }
         PlayerPrefs.Save();
 
+        // 랭킹 등록
         int count = GetUnlockCount();
-
-        LootLockerManager.Instance.SubmitScore("rank_weapon_tier", count);
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.LootLocker.SubmitScore("rank_weapon_tier", count);
+        }
     }
 
 

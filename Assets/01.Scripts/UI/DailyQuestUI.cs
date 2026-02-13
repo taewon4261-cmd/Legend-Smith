@@ -12,9 +12,9 @@ public class DailyQuestUI : MonoBehaviour
 
     public void RefreshAllSlots()
     {
-        if (QuestManager.Instance == null) return;
+        if (GameManager.Instance.Quest == null) return;
 
-        List<QuestData> questList = QuestManager.Instance.dailyQuests;
+        List<QuestData> questList = GameManager.Instance.Quest.dailyQuests;
 
         for (int i = 0; i < slots.Length; i++)
         {

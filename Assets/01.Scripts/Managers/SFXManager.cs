@@ -11,18 +11,13 @@ public class SFXData
 
 public class SFXManager : MonoBehaviour
 {
-    public static SFXManager Instance;
-
     public AudioSource audioSource;
 
     public List<SFXData> SFXList;
 
     private Dictionary<string,AudioClip> sfxDic = new Dictionary<string, AudioClip>();
-
-    private void Awake()
+    public void Init()
     {
-        if (Instance == null) Instance = this;
-        else Destroy(gameObject);
 
         foreach (var sfx in SFXList)
         {

@@ -24,7 +24,7 @@ public class ItemSellPopup : MonoBehaviour
     public void OpenPopup(InventorySlot slot, InventoryItem item)
     {
         int currentPrice = item.GetSellPrice();
-        float bonusPrice = UpgradeManager.Instance.GetTotalBonusValue(UpgradeType.SellPrice);
+        float bonusPrice = GameManager.Instance.Upgrade.GetTotalBonusValue(UpgradeType.SellPrice);
         int finalPrice = Mathf.RoundToInt(currentPrice * (1 + bonusPrice));
 
         savedSlot = slot;
@@ -34,7 +34,7 @@ public class ItemSellPopup : MonoBehaviour
         Icon.sprite = item.data.icon;
         nameText.text = item.data.itemName;
         rarityText.text = $"{item.rarity}";
-        priceText.text = $"{finalPrice} G"; 
+        priceText.text = $"{finalPrice} G";
 
         itemSellPopup.SetActive(true);
     }
@@ -42,7 +42,7 @@ public class ItemSellPopup : MonoBehaviour
     // 판매 확인 버튼
     public void OnClickSellBtn()
     {
-        InventoryManager.Instance.SellItem(savedSlot,savedItem);
+        GameManager.Instance.Inven.SellItem(savedSlot,savedItem);
 
         OnClickCancel();
     }

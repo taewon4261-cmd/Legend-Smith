@@ -63,7 +63,7 @@ public class QuestSlotUI : MonoBehaviour
 
     void OnClickClaim()
     {
-        QuestManager.Instance.ClaimReward(myQuestData);
+        GameManager.Instance.Quest.ClaimReward(myQuestData);
 
         RefreshUI();
     }

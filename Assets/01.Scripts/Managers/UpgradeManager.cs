@@ -5,19 +5,22 @@ using UnityEngine;
 
 public class UpgradeManager : MonoBehaviour
 {
-    public static UpgradeManager Instance;
-
     public List<UpgradeDataSO> allUpgradeData;
 
     public const string UpgradeKey = "Upgrade_";
 
-    public void Awake()
-    {
-        if (Instance == null) Instance = this;
-        else Destroy(gameObject);
-    }
-
     private Dictionary<string, int> upgradeLevels = new Dictionary<string, int>();
+
+    public void Init()
+    {
+        upgradeLevels.Clear();
+
+        foreach (var data in allUpgradeData)
+        {
+            int savedLevel = PlayerPrefs.GetInt(UpgradeKey + data.upgradeName, 0);
+            upgradeLevels.Add(data.upgradeName, savedLevel);
+        }
+    }
 
     public float GetTotalBonusValue(UpgradeType targetType)
     {
@@ -35,13 +38,12 @@ public class UpgradeManager : MonoBehaviour
 
     public int GetLevel(UpgradeDataSO data)
     {
-        if (!upgradeLevels.ContainsKey(data.upgradeName))
+        if (upgradeLevels.TryGetValue(data.upgradeName, out int level))
         {
-            int savedLevel = PlayerPrefs.GetInt(UpgradeKey + data.upgradeName, 0);
-            upgradeLevels.Add(data.upgradeName, savedLevel);
+            return level;
         }
 
-        return upgradeLevels[data.upgradeName];
+        return 0; // 리스트에 없는 데이터가 들어왔을 때를 대비한 안전 장치
     }
 
     public int GetCurrentCost(UpgradeDataSO data)
@@ -62,11 +64,11 @@ public class UpgradeManager : MonoBehaviour
 
         int cost = GetCurrentCost(data);
 
-        if (ResourceManager.Instance.gold >= cost)
+        if (GameManager.Instance.Resource.gold >= cost)
         {
-            ResourceManager.Instance.TrySpendGold(cost);
+            GameManager.Instance.Resource.TrySpendGold(cost);
 
-            SFXManager.Instance.PlaySFX("BuySellUpgrade", 1);
+            GameManager.Instance.SFX.PlaySFX("BuySellUpgrade", 1);
 
             currentLevel++;
             upgradeLevels[data.upgradeName] = currentLevel;
@@ -76,12 +78,12 @@ public class UpgradeManager : MonoBehaviour
 
             int totalLevel = GetAllTotalLevel();
 
-            LootLockerManager.Instance.SubmitScore("rank_upgrade_total", totalLevel);
+            GameManager.Instance.LootLocker.SubmitScore("rank_upgrade_total", totalLevel);
 
             return true;
         }
 
-        SFXManager.Instance.PlaySFX("OnClickBtnFail", 1);
+        GameManager.Instance.SFX.PlaySFX("OnClickBtnFail", 1);
 
         return false;
     }

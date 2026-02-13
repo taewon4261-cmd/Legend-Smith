@@ -79,13 +79,13 @@ public class SmithingUI : MonoBehaviour
 
         if (!isPlaying)
         {
-            SFXManager.Instance.PlaySFX("OnClickBtnFail", 2f);
+            GameManager.Instance.SFX.PlaySFX("OnClickBtnFail", 2f);
             return;
         }
 
-        SFXManager.Instance.PlaySFX("Smithing",2f);
+        GameManager.Instance.SFX.PlaySFX("Smithing",2f);
 
-        if (VibrationManager.Instance != null) VibrationManager.Instance.Vibrate();
+        if (GameManager.Instance.Vibration != null) GameManager.Instance.Vibration.Vibrate();
 
         float currentVal = timingSlider.value; ;
 
@@ -115,7 +115,7 @@ public class SmithingUI : MonoBehaviour
             AddToInventory();
             SetDifficulty();
 
-            SFXManager.Instance.PlaySFX("HitFail",1);
+            GameManager.Instance.SFX.PlaySFX("HitFail",1);
         }
     }
     void CreateWeaponSlots()
@@ -158,7 +158,7 @@ public class SmithingUI : MonoBehaviour
     public void OnButtonKeep() 
     {
         choicePopup.SetActive(false);
-        SFXManager.Instance.PlaySFX("HitSuccess",1);
+        GameManager.Instance.SFX.PlaySFX("HitSuccess",1);
         AddToInventory();
     }
 
@@ -167,24 +167,24 @@ public class SmithingUI : MonoBehaviour
     {
         if (isPlaying)
         {
-            SFXManager.Instance.PlaySFX("OnClickBtnFail", 1);
+            GameManager.Instance.SFX.PlaySFX("OnClickBtnFail", 1);
             return;
         }
 
         if (currentItem == null)
         {
-            SFXManager.Instance.PlaySFX("OnClickBtnFail", 1);
+            GameManager.Instance.SFX.PlaySFX("OnClickBtnFail", 1);
             return;
         }
 
 
-        if (InventoryManager.Instance.myInven.Count >= 15)
+        if (GameManager.Instance.Inven.myInven.Count >= 15)
         {
-            SFXManager.Instance.PlaySFX("OnClickBtnFail", 1);
+            GameManager.Instance.SFX.PlaySFX("OnClickBtnFail", 1);
             return;
         }
 
-        bool isSuccess = ResourceManager.Instance.TrySpendOre(currentItem.cost);
+        bool isSuccess = GameManager.Instance.Resource.TrySpendOre(currentItem.cost);
 
         if (isSuccess)
         {
@@ -196,20 +196,20 @@ public class SmithingUI : MonoBehaviour
         }
         else
         {
-           SFXManager.Instance.PlaySFX("OnClickBtnFail", 1);
+           GameManager.Instance.SFX.PlaySFX("OnClickBtnFail", 1);
         }
     }
 
     void AddToInventory()
     {
-        float bonusValue = UpgradeManager.Instance.GetTotalBonusValue(UpgradeType.ComboBonus);
+        float bonusValue = GameManager.Instance.Upgrade.GetTotalBonusValue(UpgradeType.ComboBonus);
         int bonusLuck = currentCombo + (int)bonusValue; // ÄÞº¸´ç È®·ü 1¾¿ Áõ°¡
 
         ItemRarity finalRarity = rateData.GetRandomRarity(bonusLuck);
 
-        InventoryManager.Instance.AddItem(currentItem, finalRarity);
+        GameManager.Instance.Inven.AddItem(currentItem, finalRarity);
 
-        QuestManager.Instance.NotifyQuestAction(QuestType.Smithing, 1);
+        GameManager.Instance.Quest.NotifyQuestAction(QuestType.Smithing, 1);
 
         isPlaying = false;
 

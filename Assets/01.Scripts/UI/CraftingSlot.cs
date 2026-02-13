@@ -40,7 +40,7 @@ public class CraftingSlot : MonoBehaviour
     void CheckUnlockStatus()
     {
         if (itemData == null) return;
-        bool result = UnlockManager.Instance.CheckUnlock(itemData);
+        bool result = GameManager.Instance.Unlock.CheckUnlock(itemData);
 
         if (result == true) UnlockSlot();
         else LockSlot();
