@@ -40,6 +40,7 @@ public class GameManager : MonoBehaviour
             Debug.unityLogger.filterLogType = LogType.Error;
         }
 
+
         if (Sound != null) Sound.Init();
         if (Inven != null) Inven.Init();
         if (App != null) App.Init();
@@ -51,6 +52,26 @@ public class GameManager : MonoBehaviour
         if(Upgrade != null) Upgrade.Init();
         if (Unlock != null) Unlock.Init();
         if(Resource != null) Resource.Init();
+    }
+
+    public void SaveAllGameData()
+    {
+        if (Resource != null) Resource.SaveAllData();
+        if (Inven != null) Inven.SaveInventory();
+        PlayerPrefs.Save();
+    }
+
+    private void OnApplicationQuit()
+    {
+        SaveAllGameData();
+    }
+
+    private void OnApplicationPause(bool pauseStatus)
+    {
+        if (pauseStatus)
+        {
+            SaveAllGameData();
+        }
     }
 
     public void OnClickExitGame()

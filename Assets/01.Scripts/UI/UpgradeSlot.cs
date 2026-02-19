@@ -43,9 +43,27 @@ public class UpgradeSlot : MonoBehaviour
 
         levelText.text = $"Lv.{level}";
 
-        effectText.text = $" 현재: + {curruentEffect + 1}\n 다음 : + {nextEffect + 1} ";
-
         costText.text = $"{cost}G";
+
+        string unit = ""; 
+
+        switch (data.type)
+        {
+            case UpgradeType.MiningAmount:
+                unit = "개";
+                break;
+
+            case UpgradeType.SellPrice:
+            case UpgradeType.ComboBonus: 
+                unit = "%";
+                break;
+
+            default:
+                unit = ""; // 예외 처리
+                break;
+        }
+
+        effectText.text = $" 현재: +{curruentEffect + 1}{unit}\n 다음 : +{nextEffect + 1}{unit}";
     }
 
     void OnClickBuy()

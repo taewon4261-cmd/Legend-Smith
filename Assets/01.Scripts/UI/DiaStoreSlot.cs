@@ -39,7 +39,7 @@ public class DiaStoreSlot : MonoBehaviour
                 unit = "G";
                 break;
             case DiaStoreType.Ore:
-                unit = "Ore";
+                unit = "±¤¼®";
                 break;
         }
 

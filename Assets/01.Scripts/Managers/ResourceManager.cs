@@ -45,30 +45,14 @@ public class ResourceManager : MonoBehaviour
 
             //생산될때마다 업데이트
             UpdateOreUI();
-            PlayerPrefs.SetInt(OreKey, currentOre);
 
             autoSaveCounter++;
             if (autoSaveCounter >= 30)
             {
-                SaveAllData();
+                GameManager.Instance.SaveAllGameData();
                 autoSaveCounter = 0;
             }
 
-        }
-    }
-
-    // 게임 꺼질때 저장
-    private void OnApplicationQuit()
-    {
-        SaveAllData();
-    }
-
-    // 게임 멈췄을때 저장
-    private void OnApplicationPause(bool pauseStatus)
-    {
-        if (pauseStatus)
-        {
-            SaveAllData();
         }
     }
 
@@ -176,7 +160,7 @@ public class ResourceManager : MonoBehaviour
        diamond =  PlayerPrefs.GetInt(DiaKey, 0);
     }
 
-    void SaveAllData()
+    public void SaveAllData()
     {
         PlayerPrefs.SetInt(OreKey, currentOre);
         PlayerPrefs.SetInt(GoldKey, gold);

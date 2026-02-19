@@ -33,6 +33,8 @@ public class VibrationManager : MonoBehaviour
 
         if (!isVibrationOn) return;
 
-        Handheld.Vibrate();
+#if UNITY_ANDROID || UNITY_IOS
+    Handheld.Vibrate();
+#endif
     }
 }

@@ -38,6 +38,7 @@ public class SmithingUI : MonoBehaviour
 
     [Header("¿Ã∆Â∆Æ")]
     public ParticleSystem hitEffect;
+    public CameraShake cameraShake;
 
     [Header("¡¶¿€ ≈∏∞Ÿ")]
     public ItemDataSO currentItem;
@@ -85,7 +86,12 @@ public class SmithingUI : MonoBehaviour
 
         GameManager.Instance.SFX.PlaySFX("Smithing",2f);
 
-        if (GameManager.Instance.Vibration != null) GameManager.Instance.Vibration.Vibrate();
+        if (GameManager.Instance.Vibration != null && isPlaying)
+            GameManager.Instance.Vibration.Vibrate();
+
+        if (cameraShake != null)
+            cameraShake.TriggerShake();
+        
 
         float currentVal = timingSlider.value; ;
 

@@ -166,9 +166,52 @@ public class InventoryManager : MonoBehaviour
         SaveInventory();
     }
 
+    public void SellAllItems()
+    {
+        if (myInven.Count == 0) return;
+
+        int totalGold = 0;
+        int totalCount = myInven.Count;
+
+        float bonusPrice = GameManager.Instance.Upgrade.GetTotalBonusValue(UpgradeType.SellPrice);
+
+        foreach (var item in myInven)
+        {
+            int originalPrice = item.GetSellPrice();
+            int finalPrice = Mathf.RoundToInt(originalPrice * (1 + bonusPrice));
+            totalGold += finalPrice;
+        }
+
+        GameManager.Instance.Resource.AddGold(totalGold);
+        GameManager.Instance.Quest.NotifyQuestAction(QuestType.Sell, totalCount);
+
+        GameManager.Instance.SFX.PlaySFX("BuySellUpgrade",1);
+
+        myInven.Clear();
+
+        ClearAllInvenUI();
+
+        SaveInventory();
+    }
+
     // 클릭 시 아이템 판매 버튼 팝업창 표시
     public void ShowSellPopup(InventorySlot slot, InventoryItem item)
     {
         popupScript.OpenPopup(slot, item);
+    }
+
+    void ClearAllInvenUI()
+    {
+        // contentParent의 자식들을 루프 돌며 풀로 반납
+        for (int i = contentParent.childCount - 1; i >= 0; i--)
+        {
+            GameObject child = contentParent.GetChild(i).gameObject;
+
+            // 활성화된 슬롯만 풀에 반납
+            if (child.activeSelf)
+            {
+                ReturnSlotToPool(child);
+            }
+        }
     }
 }
