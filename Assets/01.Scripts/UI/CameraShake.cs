@@ -1,5 +1,7 @@
+using Cysharp.Threading.Tasks;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 
 public class CameraShake : MonoBehaviour
@@ -10,6 +12,8 @@ public class CameraShake : MonoBehaviour
     private RectTransform rectTransform; 
     private Vector2 initialPosition;
 
+    private CancellationTokenSource shakeCts;
+
 
     private void Awake()
     {
@@ -17,6 +21,7 @@ public class CameraShake : MonoBehaviour
     }
     private void OnEnable()
     {
+        shakeCts?.Cancel();
         if (rectTransform != null)
         {
             initialPosition = rectTransform.anchoredPosition;
@@ -31,8 +36,11 @@ public class CameraShake : MonoBehaviour
             return;
         }
 
-        StopAllCoroutines(); // øÚ¡˜¿Ã∞Ì¿÷¥Ÿ∏È ∏ÿ√„
-        StartCoroutine(Shake());
+        shakeCts?.Cancel();
+        shakeCts?.Dispose();
+        shakeCts = new CancellationTokenSource();
+
+        ShakeTask(shakeCts.Token).Forget();
 
         if (GameManager.Instance != null)
         {
@@ -40,19 +48,32 @@ public class CameraShake : MonoBehaviour
         }
     }
 
-    IEnumerator Shake()
+    private async UniTaskVoid ShakeTask(CancellationToken token)
     {
         float elapsed = 0.0f;
 
         while (elapsed < shakeDuration)
         {
+            if (token.IsCancellationRequested) return;
+
             Vector2 randomPoint = Random.insideUnitCircle * shakeMagnitude;
             rectTransform.anchoredPosition = initialPosition + randomPoint;
 
             elapsed += Time.deltaTime;
-            yield return null;
+
+            bool isCanceled = await UniTask.Yield(PlayerLoopTiming.Update, token).SuppressCancellationThrow();
+            if (isCanceled) return;
         }
 
-        rectTransform.anchoredPosition = initialPosition;
+        if (!token.IsCancellationRequested)
+        {
+            rectTransform.anchoredPosition = initialPosition;
+        }
+    }
+
+    private void OnDestroy()
+    {
+        shakeCts?.Cancel();
+        shakeCts?.Dispose();
     }
 }

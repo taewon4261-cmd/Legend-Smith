@@ -27,13 +27,33 @@ public class InventoryManager : MonoBehaviour
 
     private const string invenWeaponKey = "Inven_";
 
+    // GC 최소화를 위한 오브젝트 풀링 큐
     private Queue<GameObject> slotPool = new Queue<GameObject>();
+
+    private Dictionary<string, ItemDataSO> weaponDict = new Dictionary<string, ItemDataSO>();
 
     public void Init()
     {
+        InitWeaponDictionary();
         LoadInventory();
     }
 
+    void InitWeaponDictionary()
+    {
+        weaponDict.Clear();
+        foreach (var data in weaponDB.allWeapon)
+        {
+            if (!weaponDict.ContainsKey(data.itemName))
+            {
+                weaponDict.Add(data.itemName, data);
+            }
+        }
+    }
+
+    /// <summary>
+    /// 풀에서 슬롯을 가져오거나 부족하면 새로 생성
+    /// </summary>
+    /// <returns></returns>
     private GameObject GetSlotFromPool()
     {
         GameObject slotObj;
@@ -47,9 +67,7 @@ public class InventoryManager : MonoBehaviour
             slotObj = Instantiate(slotPrefab, contentParent);
         }
 
-        // 계층 구조상 가장 아래로 보내서 순서 유지
-        slotObj.transform.SetAsLastSibling();
-
+        slotObj.transform.SetAsLastSibling(); // UI상 맨 뒤(아래)로 정렬
         return slotObj;
     }
 
@@ -67,7 +85,7 @@ public class InventoryManager : MonoBehaviour
     public void AddItem(ItemDataSO data, ItemRarity rarity)
     {
         // 데이터 생성 및 리스트 추가
-        InventoryItem item = new InventoryItem(data,rarity); 
+        InventoryItem item = new InventoryItem(data, rarity);
         myInven.Add(item);
 
         // 인벤토리 UI 슬롯 생성 및 데이터 전달
@@ -92,6 +110,7 @@ public class InventoryManager : MonoBehaviour
             });
         }
 
+        // 객체를 JSON으로 직렬화하여 단일 문자열로 저장 (아이템별 키를 만드는 것보다 효율적)
         string jsonString = JsonUtility.ToJson(pack);
 
         PlayerPrefs.SetString(invenWeaponKey, jsonString);
@@ -100,7 +119,7 @@ public class InventoryManager : MonoBehaviour
 
     public void LoadInventory()
     {
-        if(!PlayerPrefs.HasKey(invenWeaponKey)) return;
+        if (!PlayerPrefs.HasKey(invenWeaponKey)) return;
 
         string jsonString = PlayerPrefs.GetString(invenWeaponKey);
 
@@ -108,35 +127,26 @@ public class InventoryManager : MonoBehaviour
 
         myInven.Clear();
 
-        // contentParent.childCount : 유니티 변수 ( 현재 내 자식 오브젝트가 몇 개인지 실시간으로 세어주는 기능)
-        int myChildCount = contentParent.childCount;
-        for (int i = myChildCount - 1; i >= 0; i--)
+        // 기존에 켜져 있던 슬롯 일괄 풀 반환 ( 뒤에서부터 지워야 인덱스 꼬임 방지)
+        for (int i = contentParent.childCount - 1; i >= 0; i--)
         {
             GameObject child = contentParent.GetChild(i).gameObject;
 
-            if (child.activeSelf)
-            {
-                ReturnSlotToPool(child);
-            }
+            if (child.activeSelf) ReturnSlotToPool(child);
         }
 
         foreach (var info in pack.saveItems)
         {
-            ItemDataSO originalData = weaponDB.allWeapon.Find(X => X.itemName == info.itemName);
-
-            if (originalData != null)
+            if (weaponDict.TryGetValue(info.itemName, out ItemDataSO originalData))
             {
                 InventoryItem item = new InventoryItem(originalData, info.rarity);
                 myInven.Add(item);
 
                 GameObject slot = GetSlotFromPool();
-
                 InventorySlot slotScript = slot.GetComponent<InventorySlot>();
                 slotScript.SetSlot(item);
             }
         }
-
-
     }
 
     /// <summary>
@@ -148,21 +158,15 @@ public class InventoryManager : MonoBehaviour
     {
         // 판매금액 매니저에 반영
         float bonusRate = GameManager.Instance.Upgrade.GetTotalBonusValue(UpgradeType.SellPrice);
-        int OriginalPrice = item.GetSellPrice();
-        int finalPrice = Mathf.RoundToInt(OriginalPrice * (1 + bonusRate));
+        int finalPrice = Mathf.RoundToInt(item.GetSellPrice() * (1 + bonusRate));
 
         GameManager.Instance.Resource.AddGold(finalPrice);
-
         GameManager.Instance.Quest.NotifyQuestAction(QuestType.Sell, 1);
-
         GameManager.Instance.SFX.PlaySFX("BuySellUpgrade", 1);
 
         // 데이터 및 UI 제거
         myInven.Remove(item);
-
         ReturnSlotToPool(slot.gameObject);
-
-        //판매상태저장
         SaveInventory();
     }
 
@@ -177,20 +181,17 @@ public class InventoryManager : MonoBehaviour
 
         foreach (var item in myInven)
         {
-            int originalPrice = item.GetSellPrice();
-            int finalPrice = Mathf.RoundToInt(originalPrice * (1 + bonusPrice));
+            int finalPrice = Mathf.RoundToInt(item.GetSellPrice() * (1 + bonusPrice));
             totalGold += finalPrice;
         }
 
         GameManager.Instance.Resource.AddGold(totalGold);
         GameManager.Instance.Quest.NotifyQuestAction(QuestType.Sell, totalCount);
 
-        GameManager.Instance.SFX.PlaySFX("BuySellUpgrade",1);
+        GameManager.Instance.SFX.PlaySFX("BuySellUpgrade", 1);
 
         myInven.Clear();
-
         ClearAllInvenUI();
-
         SaveInventory();
     }
 

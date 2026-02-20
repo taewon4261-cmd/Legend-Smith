@@ -1,6 +1,8 @@
+using Cysharp.Threading.Tasks;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 
 public class QuestManager : MonoBehaviour
@@ -13,8 +15,7 @@ public class QuestManager : MonoBehaviour
     public void Init()
     {
         CheckDailyReset();
-
-        StartCoroutine(PlayTimeCoroutine());
+        PlayTimeTask(this.GetCancellationTokenOnDestroy()).Forget();
     }
 
 
@@ -64,7 +65,10 @@ public class QuestManager : MonoBehaviour
         }
         if (isChanged)
         {
-            SaveQuestProgress();
+            if (type != QuestType.PlayTime)
+            {
+                SaveQuestProgress();
+            }
         }
     }
 
@@ -80,14 +84,13 @@ public class QuestManager : MonoBehaviour
         }
     }
     
-    void SaveQuestProgress()
-    {
+    public void SaveQuestProgress()
+    { 
         for (int i = 0; i < dailyQuests.Count; i++)
         {
             PlayerPrefs.SetInt($"Quest_{i}_Amount", dailyQuests[i].currentAmount);
             PlayerPrefs.SetInt($"Quest_{i}_Claimed", dailyQuests[i].isClaimed ? 1 : 0);
         }
-        PlayerPrefs.Save();
     }
 
     void LoadQuestProgress()
@@ -99,13 +102,14 @@ public class QuestManager : MonoBehaviour
         }
     }
 
-    IEnumerator PlayTimeCoroutine()
+    private async UniTaskVoid PlayTimeTask(CancellationToken token)
     {
-        while (true)
+        while (!token.IsCancellationRequested)
         {
-            yield return new WaitForSeconds(1f); // 1초 대기
+            bool isCanceled = await UniTask.Delay(1000, cancellationToken: token).SuppressCancellationThrow();
 
-            // 1초 지날 때마다 퀘스트 매니저한테 "1초 지남" 신고
+            if (isCanceled) return;
+
             if (GameManager.Instance != null)
             {
                 GameManager.Instance.Quest.NotifyQuestAction(QuestType.PlayTime, 1);

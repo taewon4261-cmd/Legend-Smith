@@ -8,6 +8,7 @@ public class UnlockManager : MonoBehaviour
     // 저장시 사용할 키
     private const string UnlockKey = "Unlock_";
 
+    // 검색 최적화를 위한 딕셔너리 캐싱
     private Dictionary<string, bool> unlockCache = new Dictionary<string, bool>();
 
     public void Init()
@@ -46,13 +47,10 @@ public class UnlockManager : MonoBehaviour
     public int GetUnlockCount()
     {
         int count = 0;
-        // 등록된 모든 무기를 하나씩 검사
-        foreach (var weapon in allWeaponData)
+       
+        foreach (var weapon in allWeaponData)  // 등록된 모든 무기를 하나씩 검사
         {
-            if (CheckUnlock(weapon)) // 해금되었는지 확인
-            {
-                count++;
-            }
+            if (CheckUnlock(weapon)) count++; // 해금되었는지 확인
         }
         return count;
     }
@@ -66,31 +64,23 @@ public class UnlockManager : MonoBehaviour
     {
         return PlayerPrefs.GetInt("MaxWeaponCost", 0);
     }
-
+     
     public void PurchaseWeapon(ItemDataSO data)
     {
-        // 1. 저장소(PlayerPrefs)에 저장 (영구 보관)
         PlayerPrefs.SetInt(UnlockKey + data.itemName, 1);
 
-        // 2. 목록표(Dictionary)도 업데이트! (중요: 이걸 해야 재시작 안 해도 바로 반영됨)
-        if (unlockCache.ContainsKey(data.itemName))
-        {
-            unlockCache[data.itemName] = true;
-        }
-        else
-        {
-            unlockCache.Add(data.itemName, true);
-        }
+        // 딕셔너리 런타임 갱신
+        unlockCache[data.itemName] = true;
 
-        // 최대 가격 갱신 로직
+        // 랭킹 등록용
         int currentMax = PlayerPrefs.GetInt("MaxWeaponCost", 0);
         if (data.unlockedPrice > currentMax)
         {
             PlayerPrefs.SetInt("MaxWeaponCost", data.unlockedPrice);
         }
+
         PlayerPrefs.Save();
 
-        // 랭킹 등록
         int count = GetUnlockCount();
         if (GameManager.Instance != null)
         {

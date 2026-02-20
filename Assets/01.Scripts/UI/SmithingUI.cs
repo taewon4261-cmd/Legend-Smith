@@ -31,7 +31,7 @@ public class SmithingUI : MonoBehaviour
     public GameObject[] comboStars;
     private int currentCombo = 0;
     private int maxCombo = 5;
-    
+
     [Header("성공 후 팝업창")]
     public GameObject choicePopup;
     private bool isPuased;
@@ -67,14 +67,14 @@ public class SmithingUI : MonoBehaviour
     void Update()
     {
         if (timingSlider == null || isPuased || !isPlaying) return;
-        if (timingSlider != null)
-        {
-            // 데이터에서 가져온 속도를 붙여줌
-            timingSlider.value = Mathf.PingPong(Time.time * currentSpeed, 1f);
-        }
+
+        // Mathf.PingPong을 사용해 슬라이더 왕복 애니메이션을 심플하게 구현
+        timingSlider.value = Mathf.PingPong(Time.time * currentSpeed, 1f);
     }
 
-    // 핵심 코드
+    /// <summary>
+    /// 타이밍 슬라이더가 목표 지점 안에 들어왔는지 판정 (핵심 게임 루프)
+    /// </summary>
     public void CheckHit()
     {
 
@@ -84,44 +84,37 @@ public class SmithingUI : MonoBehaviour
             return;
         }
 
-        GameManager.Instance.SFX.PlaySFX("Smithing",2f);
+        GameManager.Instance.SFX.PlaySFX("Smithing", 2f);
 
         if (GameManager.Instance.Vibration != null && isPlaying)
             GameManager.Instance.Vibration.Vibrate();
 
         if (cameraShake != null)
             cameraShake.TriggerShake();
-        
+
 
         float currentVal = timingSlider.value; ;
-
-        float diff = currentVal - targetPosition;
-
-        // abs로 만든 이유 : 거리만 계산해서 판정했을땐 - 수치일때 모두 true반정이 나옴
-        float distance = Mathf.Abs(diff); 
+        float distance = Mathf.Abs(currentVal - targetPosition);
 
         if (distance <= tolerance) // 성공
         {
             isPuased = true;
-
-            SmithingEffect(true).Forget(); // 이미지 바 색 변경으로 직관적 이미지 표현
-
+            SmithingEffect(true).Forget(); // 비동기 이펙트 코루틴 대신 UniTask 활용
             if (hitEffect != null) hitEffect.Play(); // 히트이펙트
-            
+
             if (currentCombo >= maxCombo) AddToInventory();
             else choicePopup.SetActive(true);
-           
+
         }
         else // 실패
         {
             currentCombo = 0;
             UpdateComboUI(); // 실패 시 성급 이미지 다 꺼짐
             SmithingEffect(false).Forget();
-
             AddToInventory();
             SetDifficulty();
 
-            GameManager.Instance.SFX.PlaySFX("HitFail",1);
+            GameManager.Instance.SFX.PlaySFX("HitFail", 1);
         }
     }
     void CreateWeaponSlots()
@@ -161,10 +154,10 @@ public class SmithingUI : MonoBehaviour
 
 
     // 그만하기 버튼
-    public void OnButtonKeep() 
+    public void OnButtonKeep()
     {
         choicePopup.SetActive(false);
-        GameManager.Instance.SFX.PlaySFX("HitSuccess",1);
+        GameManager.Instance.SFX.PlaySFX("HitSuccess", 1);
         AddToInventory();
     }
 
@@ -202,14 +195,14 @@ public class SmithingUI : MonoBehaviour
         }
         else
         {
-           GameManager.Instance.SFX.PlaySFX("OnClickBtnFail", 1);
+            GameManager.Instance.SFX.PlaySFX("OnClickBtnFail", 1);
         }
     }
 
     void AddToInventory()
     {
         float bonusValue = GameManager.Instance.Upgrade.GetTotalBonusValue(UpgradeType.ComboBonus);
-        int bonusLuck = currentCombo + (int)bonusValue; // 콤보당 확률 1씩 증가
+        int bonusLuck = currentCombo + (int)bonusValue; // 콤보 시 가중치 반영
 
         ItemRarity finalRarity = rateData.GetRandomRarity(bonusLuck);
 
@@ -220,7 +213,7 @@ public class SmithingUI : MonoBehaviour
         isPlaying = false;
 
         currentCombo = 0;
-        SetDifficulty(); //다음 난이도
+        SetDifficulty(); // 다음 난이도
         UpdateComboUI(); // 별 추가
         timingSlider.value = 0;
         isPuased = false;
@@ -267,7 +260,7 @@ public class SmithingUI : MonoBehaviour
             WeaponCost.gameObject.SetActive(true); // 다시 켜기!
         }
     }
-       
+
 
     // 난이도 상승 시 타겟범위 변경 함수
     void UpdateTargetZoneUI(float currentTol)

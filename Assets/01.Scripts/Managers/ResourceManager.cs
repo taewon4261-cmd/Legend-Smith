@@ -17,25 +17,28 @@ public class ResourceManager : MonoBehaviour
     public TextMeshProUGUI goldText;
     public TextMeshProUGUI diaText;
 
+    // 상수로 키 값을 관리하여 오타로 인한 세이브 데이터 유실 방지
     private const string OreKey = "Ore_";
     private const string GoldKey = "Gold_";
     private const string DiaKey = "Dia_";
     public void Init()
     {
         LoadResource();
-        // UI 초기화, 게임 시작시 재화수급 시작
-        UpdateAllUI();
-        ProduceOrePerSecond().Forget();
+        UpdateAllUI(); // UI 초기화, 게임 시작시 재화수급 시작
+        ProduceOrePerSecond().Forget(); // UniTask 비동기 실행 (Fire and Forget)
     }
 
 
-    //초당 광석 재화 생산
+    /// <summary>
+    /// 백그라운드에서 초당 광석 재화를 생산하는 비동기 루틴
+    /// </summary>
     async UniTaskVoid ProduceOrePerSecond()
     {
         int autoSaveCounter = 0;
 
         while (true)
         {
+            // 취소 토큰을 넘겨주어 오브젝트 파괴 시 메모리 누수를 방지
             await UniTask.Delay(1000, cancellationToken: this.GetCancellationTokenOnDestroy());
 
             int bonus = (int)GameManager.Instance.Upgrade.GetTotalBonusValue(UpgradeType.MiningAmount);
@@ -47,7 +50,7 @@ public class ResourceManager : MonoBehaviour
             UpdateOreUI();
 
             autoSaveCounter++;
-            if (autoSaveCounter >= 30)
+            if (autoSaveCounter >= 30) // 30초마다 자동 저장
             {
                 GameManager.Instance.SaveAllGameData();
                 autoSaveCounter = 0;
@@ -60,7 +63,7 @@ public class ResourceManager : MonoBehaviour
     /// 무기 제작 전 재화 확인 후 시도할때 사용하는 함수
     /// </summary>
     /// <param name="amount"> 광석 재료 비용</param>
-    /// <returns></returns>
+    /// <returns>차감 성공 여부</returns>
     public bool TrySpendOre(int amount)
     {
         if (currentOre >= amount)
@@ -152,7 +155,7 @@ public class ResourceManager : MonoBehaviour
     {
         diaText.text = $"{diamond}";
     }
-
+     
     void LoadResource()
     {
        currentOre = PlayerPrefs.GetInt(OreKey, 500);
