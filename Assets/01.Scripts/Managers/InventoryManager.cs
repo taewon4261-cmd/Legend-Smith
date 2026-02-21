@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 [System.Serializable]
 public class ItemSaveInfo
@@ -31,6 +32,7 @@ public class InventoryManager : MonoBehaviour
     private Queue<GameObject> slotPool = new Queue<GameObject>();
 
     private Dictionary<string, ItemDataSO> weaponDict = new Dictionary<string, ItemDataSO>();
+
 
     public void Init()
     {
