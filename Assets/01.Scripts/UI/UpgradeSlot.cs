@@ -63,7 +63,7 @@ public class UpgradeSlot : MonoBehaviour
                 break;
         }
 
-        effectText.text = $" 현재: +{curruentEffect + 1}{unit}\n 다음 : +{nextEffect + 1}{unit}";
+        effectText.text = $" 현재: +{curruentEffect}{unit}\n 다음 : +{nextEffect}{unit}";
     }
 
     void OnClickBuy()

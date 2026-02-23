@@ -24,14 +24,14 @@ public class NameChanger : MonoBehaviour
         }
     }
 
-    void SubmitAllScores()
+    public void SubmitAllScores()
     {
         //  °ñµå ·©Å· 
         int currentGold = GameManager.Instance.Resource.totalGoldEarned;
         GameManager.Instance.LootLocker.SubmitScore("rank_gold", currentGold);
 
         //  ¹«±â ·©Å·
-        int weaponScore = GameManager.Instance.Unlock.GetHighestWeaponCost();
+        int weaponScore = GameManager.Instance.Unlock.GetUnlockCount();
         GameManager.Instance.LootLocker.SubmitScore("rank_weapon_tier", weaponScore);
 
         //  °­È­ ·©Å·

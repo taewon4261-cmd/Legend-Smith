@@ -26,6 +26,11 @@ public class LootLockerManager : MonoBehaviour
 
             currentPlayerID = response.player_id.ToString();
             Debug.Log("로그인 성공!  Player ID: " + currentPlayerID);
+
+            if (GameManager.Instance != null && GameManager.Instance.NameChanger != null)
+            {
+                GameManager.Instance.NameChanger.SubmitAllScores();
+            }
         });
     }
 

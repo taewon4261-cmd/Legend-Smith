@@ -102,7 +102,14 @@ public class SmithingUI : MonoBehaviour
             SmithingEffect(true).Forget(); // 비동기 이펙트 코루틴 대신 UniTask 활용
             if (hitEffect != null) hitEffect.Play(); // 히트이펙트
 
-            if (currentCombo >= maxCombo) AddToInventory();
+            currentCombo++;
+            UpdateComboUI();
+
+            if (currentCombo >= maxCombo)
+            {
+                GameManager.Instance.SFX.PlaySFX("HitSuccess", 1);
+                AddToInventory();
+            }
             else choicePopup.SetActive(true);
 
         }
@@ -143,10 +150,7 @@ public class SmithingUI : MonoBehaviour
     {
         choicePopup.SetActive(false);
 
-        currentCombo++;
         SetDifficulty();
-        UpdateComboUI();
-
         timingSlider.value = 0;
 
         isPuased = false;

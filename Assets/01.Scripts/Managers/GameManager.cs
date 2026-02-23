@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     public UpgradeManager Upgrade;
     public UnlockManager Unlock;
     public ResourceManager Resource;
+    public NameChanger NameChanger;
 
     private void Awake()
     {
