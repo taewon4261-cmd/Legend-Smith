@@ -10,7 +10,7 @@ public class QuestManager : MonoBehaviour
     [Header("Äù½ºÆ® ¸ñ·Ï")]
     public List<QuestData> dailyQuests;
 
-    private const string LastLoginKey = "LastLoinData_";
+    private const string LastLoginKey = "LastLoginData_";
 
     public void Init()
     {
