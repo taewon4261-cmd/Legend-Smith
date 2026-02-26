@@ -2,6 +2,8 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using System.Collections;
+using Cysharp.Threading.Tasks;
+using System;
 
 public class NameChanger : MonoBehaviour
 {
@@ -19,8 +21,7 @@ public class NameChanger : MonoBehaviour
             PlayerPrefs.Save();
 
             SubmitAllScores();
-            StopAllCoroutines();
-            StartCoroutine(RefreshRankingCoroutine());
+            RefreshLeaderboardAsync().Forget();
         }
     }
 
@@ -39,10 +40,9 @@ public class NameChanger : MonoBehaviour
         GameManager.Instance.LootLocker.SubmitScore("rank_upgrade_total", upgradeScore);
     }
 
-    IEnumerator RefreshRankingCoroutine()
+    async UniTaskVoid RefreshLeaderboardAsync()
     {
-        yield return new WaitForSeconds(1.5f);
-
+        await UniTask.Delay(1500, cancellationToken: this.GetCancellationTokenOnDestroy());
         if (leaderboardUI != null)
         {
             leaderboardUI.OnClickTab("rank_gold");

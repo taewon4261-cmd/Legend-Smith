@@ -11,8 +11,8 @@ public class RankSlot : MonoBehaviour
     // 데이터를 받아서 텍스트를 갱신하는 함수
     public void SetUI(int rank, string name, int score)
     {
-        rankText.text = $"{rank}등";
+        rankText.SetText("{0}등", rank);
         nameText.text = name;
-        scoreText.text = $"{score}점";
+        scoreText.SetText("{0}점", score);
     }
 }

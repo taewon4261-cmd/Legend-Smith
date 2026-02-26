@@ -41,9 +41,9 @@ public class UpgradeSlot : MonoBehaviour
 
         nameText.text = data.upgradeName;
 
-        levelText.text = $"Lv.{level}";
+        levelText.SetText("Lv.{0}", level);
 
-        costText.text = $"{cost}G";
+        costText.SetText("{0}G", cost);
 
         string unit = ""; 
 
@@ -63,7 +63,7 @@ public class UpgradeSlot : MonoBehaviour
                 break;
         }
 
-        effectText.text = $" 현재: +{curruentEffect}{unit}\n 다음 : +{nextEffect}{unit}";
+        effectText.SetText ($" 현재: +{curruentEffect}{unit}\n 다음 : +{nextEffect}{unit}");
     }
 
     void OnClickBuy()

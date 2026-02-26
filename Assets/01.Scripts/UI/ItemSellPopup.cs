@@ -34,7 +34,7 @@ public class ItemSellPopup : MonoBehaviour
         Icon.sprite = item.data.icon;
         nameText.text = item.data.itemName;
         rarityText.text = $"{item.rarity}";
-        priceText.text = $"{finalPrice} G";
+        priceText.SetText("{0} G", finalPrice);
 
         itemSellPopup.SetActive(true);
     }
